@@ -19,4 +19,9 @@ function App() {
   );
 }
 
+//next Steps: Figure out how many pages my app will be. 2-3?
+//make buttons in navbar clickable to navigte to each page
+//workout logic got user login page 
+//Modal for user login? 
+
 export default App;
