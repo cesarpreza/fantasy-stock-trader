@@ -12,16 +12,17 @@ function App() {
         <Navbar />
           <Switch>
             <Route path='/' exact component={LoginPage} />
-            <Route path='/trade' exact component={Portfolio} />
+            <Route path='/dashboard' exact component={Portfolio} />
           </Switch>
       </Router>
     </div>
   );
 }
 
-//next Steps: Figure out how many pages my app will be. 2-3?
-//make buttons in navbar clickable to navigte to each page
-//workout logic got user login page 
-//Modal for user login? 
+//next Steps: Switch gears to a single user using the app that can trade. 
+// No login for now
+// create dummy trade data to pass from font end to back end 
+// create portfolio page
+  // account balance, stocks holding, value of holding, total assets. 
 
 export default App;
