@@ -2,6 +2,10 @@
 	margin: auto;
 }
 
+.holdings-container {
+	margin: 25px auto;
+}
+
 nav {
 	background-color: #393e46;
 }
@@ -12,6 +16,14 @@ nav {
 	height: 40px;
 	margin: auto;
 	width: 80%;
+}
+
+.stocks {
+	width: 100px;
+}
+
+th {
+	justify-content: space-around;
 }
 
 .title-container {
