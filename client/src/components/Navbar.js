@@ -10,17 +10,17 @@ function Navbar() {
                     <ul className='navbar-nav ml-auto'>
                         <li className='nav-item'>
                             <Link className='nav-link' to='/dashboard'>
-                                <button>Portfolio</button>
+                                <button className='btn btn-light btn-sm'>Portfolio</button>
                             </Link>
                         </li>
                         <li className='nav-item ml-auto'>
                             <Link className='nav-link' to='/trade'>
-                                <button>Trade</button>
+                                <button className='btn btn-light btn-sm'>Trade</button>
                             </Link>
                         </li>
                         <li className='nav-item ml-auto'>
                             <Link className='nav-link' to='/'>
-                                <button>Log Out</button>
+                                <button className='btn btn-light btn-sm'>Log Out</button>
                             </Link>
                         </li>
                     </ul>
