@@ -1,13 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     return (
-        <nav className='navbar navbar-dark mr-auto'>
+        <nav className='navbar navbar-dark navbar-expand-sm'>
             <h2 className='navbar-brand'>Stock Traderz</h2>
             <nav className='ml-auto'>
-                <button>Portfolio</button>
-                <button>Trade</button>
-                <button>Log Out</button>
+                <div>
+                    <ul className='navbar-nav ml-auto'>
+                        <li className='nav-item'>
+                            <Link className='nav-link' to='/dashboard'>
+                                <button>Portfolio</button>
+                            </Link>
+                        </li>
+                        <li className='nav-item ml-auto'>
+                            <Link className='nav-link' to='/trade'>
+                                <button>Trade</button>
+                            </Link>
+                        </li>
+                        <li className='nav-item ml-auto'>
+                            <Link className='nav-link' to='/'>
+                                <button>Log Out</button>
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </nav>
     )
