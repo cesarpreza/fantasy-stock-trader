@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { Navbar, Card } from 'react-bootstrap';
 
+
 class Portfolio extends Component {
     constructor(props) {
         super(props);
         this.state = {
             accountBalance: 100000,
             totalHoldings: 0,
-            stockSymbol: 'aapl',
-            stockPrice: 0,
-            shares: 0,
-            holdingValue: 0
+            stocks: []
         }
+        this.loadStock = this.loadStock.bind(this)
     }
+
+    async loadStock() {
+        
+    }
+
     render() {
         return (
             <div>
@@ -59,7 +63,5 @@ class Portfolio extends Component {
         )
     }
 }
-
-// Toolbar for portfolio, center items for navbar
 
 export default Portfolio
