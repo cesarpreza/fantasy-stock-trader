@@ -12,9 +12,14 @@ console.log('listening on port 3000');
 app.get('/api/stocks', (req, res) => {
     const stockData = [
         {
-            "symbol": "aapl",
+            "name": "Apple Inc.",
+            "symbol": "AAPL",
             "pricePerShare": 200,
-            "shares": 1,
+        },
+        {
+            "name": "Game Stop",
+            "symbol": "GME",
+            "pricePerShare": 150,
         }
     ]
     res.json(stockData)

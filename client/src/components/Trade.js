@@ -6,16 +6,30 @@ class Trade extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            searchTerm: '',
             stock: []
         }
+        this.stockData = this.stockData.bind(this)
     }
 
-    async componentDidMount() {
+    handleChange = e => {
+        this.setState({ searchTerm: e.target.value })
+    }
+
+    async stockData() {
         await axios.get(`api/stocks`)
             .then(res => {
-            this.setState({ stock: res.data})
+            this.setState({ stock: res.data })
         })
     }
+
+    //Removed ComponentDIdMount 
+
+    handleSubmit = e => {
+        e.preventDefault();
+        console.log('submit hit')
+    }
+
     render() {
         console.log(this.state.stock)
         return (
@@ -27,18 +41,18 @@ class Trade extends Component {
                 </div>
                 <div>
                     <Form>
-                        <input type='text' placeholder='example.. aapl' />
-                        <Button>Search</Button>
+                        <input value={this.state.searchTerm} onChange={this.handleChange} type='text' placeholder='example.. aapl' />
+                        <Button onClick={this.handleSubmit}>Search</Button>
                     </Form>
                 </div>
                 <div>
-                    {this.state.stock.map(data => {
-                        <tbody>
-                            <tr>
-                                <td>{data.pricePerShare}</td>
-                                <td>{data.symbol}</td>
-                            </tr>
-                        </tbody>
+                    {this.state.stock.map((data) => {
+                        return (
+                            <div>
+                                <h2>Price: {data.pricePerShare}</h2>
+                                <h2>Symbol: {data.symbol}</h2>
+                            </div>
+                        )
                     })}
                 </div>
             </div>
