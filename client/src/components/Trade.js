@@ -23,14 +23,30 @@ class Trade extends Component {
         })
     }
 
-    //Removed ComponentDIdMount 
+    // async componentDidMount() {
+    //     await axios.get(`api/stocks`)
+    //         .then(res => {
+    //         this.setState({ stock: res.data.symbol })
+    //     })
+    // } 
 
     handleSubmit = e => {
         e.preventDefault();
+        if (this.state.searchTerm === '') {
+            alert('Enter a stock symbol')
+        } else if (this.state.searchTerm) {
+            axios.get('/api/stocks')
+                .then(res => {
+                    res.data.symbol.includes(this.state.searchTerm)
+                    
+                console.log(res.data)
+            } )
+        }
         console.log('submit hit')
     }
 
     render() {
+        console.log(this.state.searchTerm)
         console.log(this.state.stock)
         return (
             <div>

@@ -12,11 +12,13 @@ console.log('listening on port 3000');
 app.get('/api/stocks', (req, res) => {
     const stockData = [
         {
+            "id": 1,
             "name": "Apple Inc.",
             "symbol": "AAPL",
-            "pricePerShare": 200,
+            "pricePerShare": 130,
         },
         {
+            "id": 2,
             "name": "Game Stop",
             "symbol": "GME",
             "pricePerShare": 150,
@@ -25,10 +27,6 @@ app.get('/api/stocks', (req, res) => {
     res.json(stockData)
 })
 
-
-
-
-//Catch all routes.
 app.get("/*", (req, res) =>
 res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 );
