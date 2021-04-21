@@ -9,40 +9,18 @@ class Trade extends Component {
             searchTerm: '',
             stock: []
         }
-        this.stockData = this.stockData.bind(this)
     }
 
     handleChange = e => {
         this.setState({ searchTerm: e.target.value })
     }
 
-    async stockData() {
-        await axios.get(`api/stocks`)
+    handleSubmit = e => {
+        e.preventDefault();
+        axios.get(`api/stocks`)
             .then(res => {
             this.setState({ stock: res.data })
         })
-    }
-
-    // async componentDidMount() {
-    //     await axios.get(`api/stocks`)
-    //         .then(res => {
-    //         this.setState({ stock: res.data.symbol })
-    //     })
-    // } 
-
-    handleSubmit = e => {
-        e.preventDefault();
-        if (this.state.searchTerm === '') {
-            alert('Enter a stock symbol')
-        } else if (this.state.searchTerm) {
-            axios.get('/api/stocks')
-                .then(res => {
-                    res.data.symbol.includes(this.state.searchTerm)
-                    
-                console.log(res.data)
-            } )
-        }
-        console.log('submit hit')
     }
 
     render() {
@@ -65,8 +43,8 @@ class Trade extends Component {
                     {this.state.stock.map((data) => {
                         return (
                             <div>
-                                <h2>Price: {data.pricePerShare}</h2>
-                                <h2>Symbol: {data.symbol}</h2>
+                                <p>Price: {data.pricePerShare}</p>
+                                <p>Symbol: {data.symbol}</p>
                             </div>
                         )
                     })}
