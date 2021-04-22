@@ -17,10 +17,14 @@ class Trade extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        axios.get(`api/stocks`)
-            .then(res => {
-            this.setState({ stock: res.data })
-        })
+        if (this.state.searchTerm === '') {
+            alert('Enter a stock symbol. Example: AAPL for Apple inc.')
+        } else {
+            axios.get(`api/stocks?stockName=${this.state.searchTerm}`)
+                .then(res => {
+                this.setState({ stock: res.data, searchTerm: '' })
+            })
+        }
     }
 
     render() {
@@ -40,14 +44,14 @@ class Trade extends Component {
                     </Form>
                 </div>
                 <div>
-                    {this.state.stock.map((data) => {
+                    {/* {this.state.stock.map((data) => {
                         return (
                             <div>
                                 <p>Price: {data.pricePerShare}</p>
                                 <p>Symbol: {data.symbol}</p>
                             </div>
                         )
-                    })}
+                    })} */}
                 </div>
             </div>
         )

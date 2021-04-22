@@ -13,31 +13,16 @@ app.listen(3000);
 console.log('listening on port 3000');
 
 app.get('/api/stocks', (req, res) => {
-    //const stockName = req.query;
+    const stockName = req.query.stockName
     axios({
         method: 'get',
-        url: `https://sandbox.iexapis.com/stable/stock/fb/quote?token=${publicToken}`
+        url: `https://sandbox.iexapis.com/stable/stock/${stockName}/quote?token=${publicToken}`
     })
         .then(responce => {
             res.json(responce.data);
         }).catch(err => {
         console.log(err.message)
     })
-    // const stockData = [
-    //     {
-    //         "id": 1,
-    //         "name": "Apple Inc.",
-    //         "symbol": "AAPL",
-    //         "pricePerShare": 130,
-    //     },
-    //     {
-    //         "id": 2,
-    //         "name": "Game Stop",
-    //         "symbol": "GME",
-    //         "pricePerShare": 150,
-    //     }
-    // ]
-    // res.send(stockData)
 })
 
 app.get("/*", (req, res) =>
