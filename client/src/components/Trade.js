@@ -38,19 +38,24 @@ class Trade extends Component {
                         current price of a specific option and to buy shares.</p>
                 </div>
                 <div>
-                    <Form>
+                    <Form onSubmit={this.handleSubmit}>
                         <input value={this.state.searchTerm} onChange={this.handleChange} type='text' placeholder='example.. aapl' />
-                        <Button onClick={this.handleSubmit}>Search</Button>
+                        <Button type='submit'>Search</Button>
                     </Form>
                 </div>
                 <div>
-                    {/* {this.state.stock.map((data) => {
+                    {Object.keys(this.state.stock).map((stocks, i) => {
                         return (
-                            <div>
-                                <p>Price: {data.pricePerShare}</p>
-                                <p>Symbol: {data.symbol}</p>
+                            <div key={i}>
+                                <p>{ this.state.stock[stocks] }</p>
                             </div>
                         )
+                    })}
+                    {/* {this.state.stock.map(stockData => {
+                            <div>
+                                <p>Symbol: {stockData.latestPrice}</p>
+                                <p>Latest Price: {stockData.symbol}</p>
+                            </div>
                     })} */}
                 </div>
             </div>
