@@ -18,11 +18,11 @@ class Trade extends Component {
     handleSubmit = e => {
         e.preventDefault();
         if (this.state.searchTerm === '') {
-            alert('Enter a stock symbol. Example: AAPL for Apple inc.')
+            alert('Enter a stock symbol. Example: AAPL for Apple inc.');
         } else {
             axios.get(`api/stocks?stockName=${this.state.searchTerm}`)
                 .then(res => {
-                this.setState({ stock: res.data, searchTerm: '' })
+                    this.setState({ stock: res.data, searchTerm: '' })
             })
         }
     }
@@ -44,19 +44,10 @@ class Trade extends Component {
                     </Form>
                 </div>
                 <div>
-                    {Object.keys(this.state.stock).map((stocks, i) => {
-                        return (
-                            <div key={i}>
-                                <p>{ this.state.stock[stocks] }</p>
-                            </div>
-                        )
-                    })}
-                    {/* {this.state.stock.map(stockData => {
-                            <div>
-                                <p>Symbol: {stockData.latestPrice}</p>
-                                <p>Latest Price: {stockData.symbol}</p>
-                            </div>
-                    })} */}
+                    <ul>
+                        <li>{this.state.stock.symbol}</li>
+                        <li>{this.state.stock.latestPrice}</li>
+                    </ul>
                 </div>
             </div>
         )
