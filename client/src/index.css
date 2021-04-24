@@ -29,3 +29,9 @@ th {
 .title-container {
 	margin: 25px auto;
 }
+
+table {
+	display: flex;
+	justify-content: space-evenly;
+	margin: 10;
+}

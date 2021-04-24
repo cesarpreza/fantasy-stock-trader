@@ -48,10 +48,10 @@ class Portfolio extends Component {
                                     </thead>
                                         <tbody>
                                             <tr className='stock-info'>
-                                                <td>{this.state.stockSymbol}</td>
+                                                {/* <td>{this.state.stockSymbol}</td>
                                                 <td>${this.state.stockPrice}</td>
                                                 <td>{this.state.shares}</td>
-                                                <td>${this.state.holdingValue}</td>
+                                                <td>${this.state.holdingValue}</td> */}
                                             </tr>
                                         </tbody>
                                     </table>
