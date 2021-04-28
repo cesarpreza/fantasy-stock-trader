@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from './Modal';
+import StockModal from './StockModal';
 import { Button, Form, Card, Navbar } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -53,14 +53,14 @@ class Trade extends Component {
                     </Form>
                 </div>
                 <div>
-                    <Modal/>
-                    {this.state.isStockValid ?
+                    <StockModal />
+                    {/* {this.state.isStockValid ?
                         <ul>
                             <li>Company Name: {this.state.stock.companyName}</li>
                             <li>Stock Symbol: {this.state.stock.symbol}</li>
                             <li>Lates Price: {this.state.stock.latestPrice}</li>
                         </ul> :
-                        null }
+                        null } */}
                 </div>
                 <div>
                 <Card>
