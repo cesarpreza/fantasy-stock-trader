@@ -9,6 +9,7 @@ class Trade extends Component {
         this.state = {
             searchTerm: '',
             stock: [],
+            isModalShown: true,
             isStockValid: false,
             accountBalance: 10000,
             holdingValue: 0
@@ -41,7 +42,7 @@ class Trade extends Component {
                     <h2>Trade</h2>
                     <Navbar id='portfolio-nav' className='nav-dark'>
                         <p className='balances'>Account Balance: ${this.state.accountBalance}</p>
-                        <p className='balances'>Total Holding Value: ${this.state.totalHoldings}</p>
+                        <p className='balances'>Total Holding Value: ${this.state.holdingValue}</p>
                     </Navbar>
                     <p>Enter a stock symbol below to see the
                         current price of a specific option and to buy shares.</p>
@@ -53,7 +54,7 @@ class Trade extends Component {
                     </Form>
                 </div>
                 <div>
-                    <StockModal />
+                    <StockModal showModal={this.state.isModalShown} />
                     {/* {this.state.isStockValid ?
                         <ul>
                             <li>Company Name: {this.state.stock.companyName}</li>

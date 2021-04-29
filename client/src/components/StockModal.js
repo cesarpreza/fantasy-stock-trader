@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
-function StockModal() {
+function StockModal(props) {
     return (
         <div>
-            <Modal show={false}>
+            <Modal showModal={props.isModalShown}>
                 <Modal.Header>
                     <h3>Stock Info</h3>
                 </Modal.Header>
