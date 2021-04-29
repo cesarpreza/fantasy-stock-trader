@@ -9,7 +9,7 @@ class Trade extends Component {
         this.state = {
             searchTerm: '',
             stock: [],
-            isModalShown: true,
+            isModalShown: false,
             isStockValid: false,
             accountBalance: 10000,
             holdingValue: 0
@@ -49,19 +49,25 @@ class Trade extends Component {
                 </div>
                 <div>
                     <Form onSubmit={this.handleSubmit}>
-                        <input value={this.state.searchTerm} onChange={this.handleChange} type='text' placeholder='example.. aapl' />
-                        <Button type='submit'>Search</Button>
+                        <input
+                            value={this.state.searchTerm}
+                            onChange={this.handleChange}
+                            type='text'
+                            placeholder='example.. aapl' />
+                        <Button
+                            onClick={() => this.setState({ isModalShown: true })}
+                            type='submit'>Search</Button>
                     </Form>
                 </div>
                 <div>
-                    <StockModal showModal={this.state.isModalShown} />
-                    {/* {this.state.isStockValid ?
+                    
+                    {this.state.isStockValid ?
                         <ul>
                             <li>Company Name: {this.state.stock.companyName}</li>
                             <li>Stock Symbol: {this.state.stock.symbol}</li>
                             <li>Lates Price: {this.state.stock.latestPrice}</li>
                         </ul> :
-                        null } */}
+                        null }
                 </div>
                 <div>
                 <Card>

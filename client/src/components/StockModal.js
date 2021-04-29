@@ -4,12 +4,12 @@ import { Button, Modal } from 'react-bootstrap';
 function StockModal(props) {
     return (
         <div>
-            <Modal showModal={props.isModalShown}>
+            <Modal show={props.show}>
                 <Modal.Header>
-                    <h3>Stock Info</h3>
+                    {props.companyName}
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Price</p>
+
                 </Modal.Body>
                 <Modal.Footer>
                     <Button>Close</Button>
