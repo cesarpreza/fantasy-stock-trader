@@ -32,6 +32,10 @@ class Trade extends Component {
         }
     }
 
+    closeModal = () => {
+        this.setState({isModalShown: false, isStockValid: false})
+    }
+
     render() {
         console.log(this.state.searchTerm)
         console.log(this.state.stock)
@@ -60,14 +64,16 @@ class Trade extends Component {
                     </Form>
                 </div>
                 <div>
-                    
-                    {this.state.isStockValid ?
-                        <ul>
-                            <li>Company Name: {this.state.stock.companyName}</li>
-                            <li>Stock Symbol: {this.state.stock.symbol}</li>
-                            <li>Lates Price: {this.state.stock.latestPrice}</li>
-                        </ul> :
-                        null }
+                    {this.state.isStockValid ? 
+                        <StockModal
+                            show={this.state.isModalShown}
+                            companyName={this.state.stock.companyName}
+                            stockSymbol={this.state.stock.symbol}
+                            stockPrice={this.state.stock.latestPrice}
+                            closeModal={this.closeModal}
+                        /> :
+                            null
+                    }
                 </div>
                 <div>
                 <Card>
@@ -84,8 +90,8 @@ class Trade extends Component {
                                     </thead>
                                         <tbody>
                                             <tr>
-                                                {/* <td>{this.state.stockSymbol}</td>
-                                                <td>${this.state.stockPrice}</td>
+                                                {/* <td></td>
+                                                <td>$</td>
                                                 <td>{this.state.shares}</td>
                                                 <td>${this.state.holdingValue}</td> */}
                                             </tr>
