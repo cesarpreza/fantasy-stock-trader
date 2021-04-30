@@ -64,14 +64,14 @@ class Trade extends Component {
                     </Form>
                 </div>
                 <div>
-                    {this.state.isStockValid ? 
+                    {this.state.isStockValid ?
                         <StockModal
                             show={this.state.isModalShown}
                             companyName={this.state.stock.companyName}
                             stockSymbol={this.state.stock.symbol}
                             stockPrice={this.state.stock.latestPrice}
                             closeModal={this.closeModal}
-                        /> :
+                            accountBalance={this.state.accountBalance}                        /> :
                             null
                     }
                 </div>

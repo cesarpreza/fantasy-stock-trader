@@ -2,12 +2,32 @@
 	margin: auto;
 }
 
+.email-input {
+	padding-top: 30px;
+}
+
 .holdings-container {
 	margin: 25px auto;
 }
 
+.login-container {
+	height: 100vh;
+	background-image: url(images/stock-img.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#login-form {
+	background-color: white;
+	height: 50vh;
+	width: 100%;
+	max-width: 500px;
+	padding: 30px;
+	margin: auto;
+}
+
 nav {
-	background-color: #393e46;
+	background-color: #3caa54;
 }
 
 #portfolio-nav {

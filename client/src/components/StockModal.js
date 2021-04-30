@@ -7,11 +7,12 @@ function StockModal(props) {
         <div>
             <Modal show={props.show}>
                 <Modal.Header>
-                    {props.companyName}
+                    <h5>{props.companyName} ({props.stockSymbol})</h5>
+                    <p>Available Balance - ${ props.accountBalance }</p>
                 </Modal.Header>
                 <Modal.Body>
-                    {props.stockSymbol}
-                    {props.stockPrice}
+                    <p>Stock price: ${props.stockPrice} </p>
+                    
                 </Modal.Body>
                 <Modal.Footer>
                     <Button className='btn btn-primary'>Buy Stocks</Button>
