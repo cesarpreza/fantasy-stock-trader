@@ -20,7 +20,7 @@ let users = [
 ]
 
     app.post('/api/auth', (req, res) => {
-        let userResult = users.find(user => user.email == req.body);
+        let userResult = users.find(user => user.email === req.body.email);
         if (userResult) {
             if (user.password === req.body.password) {
                 res.status(200).send({
