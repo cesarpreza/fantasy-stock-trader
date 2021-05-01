@@ -2,10 +2,13 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const port = process.env.PORT || 3000;
-require('dotenv').config();
 const publicToken = process.env.PUBLIC_KEY;
 
+require('dotenv').config();
+
 const app = express();
+
+app.use(express.json());
 
 app.use('/', express.static(path.join(__dirname, 'client/build')));
 
@@ -14,21 +17,29 @@ console.log('listening on port 3000');
 
 let users = [
     {
-        email: "abc@email.com",
-        password: "abc123"
+        id: 1,
+        userName: 'user1',
+        email: 'abc@email.com',
+        password: 'abc123'
+    },
+    {
+        id: 2,
+        userName: 'user2',
+        email: '123@email.com',
+        password: '123abc'
     }
 ]
 
     app.post('/api/auth', (req, res) => {
         let userResult = users.find(user => user.email === req.body.email);
         if (userResult) {
-            if (user.password === req.body.password) {
+            if (userResult.password === req.body.password) {
                 res.status(200).send({
-                    message: 'Password Matched'
+                    message: 'User Found'
                 })
             } else {
                 res.status(200).send({
-                    message: 'Password incorrect'
+                    message: 'Password incorrect or user does not exist'
                 })
             }
         } else {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, Button, Col, Row } from 'react-bootstrap';
-import stockImage from '../images/stock-img.jpg';
+import axios from 'axios';
 
 // LEFT OFF: Create dummy data for a user login on server side ? Post request ?
 //send username and password to server?
@@ -25,11 +25,22 @@ class LoginPage extends Component {
     
     handleSubmit = e => {
         e.preventDefault()
+        const request = {
+            email: this.state.userEmail,
+            password: this.state.userPassword
+        }
         if (this.state.userEmail === '' || this.state.userPassword === '') {
             alert('Enter Username and Password')
         } else {
             this.setState({userEmail: '', userPassword: ''})
         }
+        axios.post(`http://localhost:3000/api/auth`, request)
+            .then(res => {
+            console.log(res.data.message)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     
     render() {
@@ -37,7 +48,7 @@ class LoginPage extends Component {
         return (
             <div className='login-container'>
                 <div>
-                    <Form id='login-form' >
+                    <Form id='login-form' onSubmit={e => this.handleSubmit(e)} >
                         <h1>Stock Traders</h1>
                         <h5>Welcome to my fantasy stock trading application. Once logged in you will be able to
                             buy and sell stocks using real time data from the IEX Cloud API.
@@ -65,7 +76,7 @@ class LoginPage extends Component {
                             </Col>
                         </Form.Group>
                         <div id='form-buttons'>
-                            <Button className='btn btn-sm' onClick={this.handleSubmit} type='submit'>Login</Button>
+                            <Button className='btn btn-sm' type='submit'>Login</Button>
                             <p>or</p>
                             <Button className='btn btn-sm'>Sign Up</Button>
                         </div>
