@@ -20,13 +20,13 @@ let users = [
         id: 1,
         userName: 'user1',
         email: 'abc@email.com',
-        password: 'abc123'
+        password: 'abc'
     },
     {
         id: 2,
         userName: 'user2',
         email: '123@email.com',
-        password: '123abc'
+        password: '123'
     }
 ]
 
@@ -35,11 +35,11 @@ let users = [
         if (userResult) {
             if (userResult.password === req.body.password) {
                 res.status(200).send({
-                    message: 'User Found'
+                    message: true
                 })
             } else {
                 res.status(200).send({
-                    message: 'Password incorrect or user does not exist'
+                    message: false
                 })
             }
         } else {

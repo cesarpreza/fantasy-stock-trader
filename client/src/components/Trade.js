@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import StockModal from './StockModal';
 import { Button, Form, Card, Navbar } from 'react-bootstrap';
 import axios from 'axios';
@@ -105,4 +106,4 @@ class Trade extends Component {
     }
 }
 
-export default Trade;
+export default withRouter(Trade);

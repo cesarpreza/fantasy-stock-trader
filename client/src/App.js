@@ -21,10 +21,10 @@ function App() {
   );
 }
 
-//next Steps: Switch gears to a single user using the app that can trade. 
-// No login for now
-// create dummy trade data to pass from font end to back end 
-// create portfolio page
-  // account balance, stocks holding, value of holding, total assets. 
+//next Steps: Implement dummy data to login a user
+  //Use React Router to create a protected route.
+  //if the user is authorized (state),
+  // return() the Component. 
+  // else return the login screen. 
 
 export default App;

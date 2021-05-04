@@ -11,6 +11,7 @@ class LoginPage extends Component {
         this.state = {
             userEmail: '',
             userPassword: '',
+            isAuth: false
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -36,6 +37,11 @@ class LoginPage extends Component {
         }
         axios.post(`http://localhost:3000/api/auth`, request)
             .then(res => {
+                if(res.data.message) {
+                    this.setState({isAuth: true})
+                } else {
+                    this.setState({isAuth: false})
+                }
             console.log(res.data.message)
             })
             .catch(err => {
@@ -44,7 +50,7 @@ class LoginPage extends Component {
     }
     
     render() {
-        console.log(this.state.userEmail, this.state.userPassword)
+        console.log(this.state.userEmail, this.state.userPassword, `isAuth is: ${this.state.isAuth}`)
         return (
             <div className='login-container'>
                 <div>
