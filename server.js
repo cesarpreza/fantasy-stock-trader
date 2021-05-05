@@ -2,8 +2,9 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const port = process.env.PORT || 3000;
-const publicToken = process.env.PUBLIC_KEY;
-const secretKey = process.env.SECRET_KEY;
+const testPublicToken = process.env.TEST_PUBLIC_KEY;
+const testSecretKey = process.env.TEST_SECRET_KEY;
+const prodSecretKey = process.env.SECRET_KEY;
 
 require('dotenv').config();
 
@@ -54,7 +55,7 @@ app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName
     axios({
         method: 'get',
-        url: `https://cloud.iexapis.com/stable/stock/${stockName}/quote?token=${secretKey}`
+        url: `https://sandbox.iexapis.com/stable/stock/${stockName}/quote?token=${testSecretKey}`
     })
         .then(responce => {
             res.json(responce.data);
@@ -66,3 +67,5 @@ app.get('/api/stocks', (req, res) => {
 app.get("/*", (req, res) =>
 res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 );
+
+//Sandbox URL: https://sandbox.iexapis.com
