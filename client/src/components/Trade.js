@@ -72,7 +72,8 @@ class Trade extends Component {
                             stockSymbol={this.state.stock.symbol}
                             stockPrice={this.state.stock.latestPrice}
                             closeModal={this.closeModal}
-                            accountBalance={this.state.accountBalance}                        /> :
+                            accountBalance={this.state.accountBalance}
+                        /> :
                             null
                     }
                 </div>

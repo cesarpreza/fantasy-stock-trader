@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 
-// LEFT OFF: Create dummy data for a user login on server side ? Post request ?
-//send username and password to server?
-
 class LoginPage extends Component {
     constructor(props) {
         super(props);

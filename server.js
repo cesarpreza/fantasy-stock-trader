@@ -65,5 +65,3 @@ app.get('/api/stocks', (req, res) => {
 app.get("/*", (req, res) =>
 res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 );
-
-//Sandbox testing URL:  https://sandbox.iexapis.com/ 
