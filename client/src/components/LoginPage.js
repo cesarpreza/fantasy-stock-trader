@@ -37,7 +37,8 @@ class LoginPage extends Component {
         }
         axios.post(`http://localhost:3000/api/auth`, request)
             .then(res => {
-                if(res.data.message) {
+                if (res.data.message) {
+                    this.props.history.push('/dashboard')
                     this.setState({isAuth: true})
                 } else {
                     this.setState({isAuth: false})
