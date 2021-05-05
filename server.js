@@ -3,6 +3,7 @@ const axios = require('axios');
 const path = require('path');
 const port = process.env.PORT || 3000;
 const publicToken = process.env.PUBLIC_KEY;
+const secretKey = process.env.SECRET_KEY;
 
 require('dotenv').config();
 
@@ -53,7 +54,7 @@ app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName
     axios({
         method: 'get',
-        url: `https://sandbox.iexapis.com/stable/stock/${stockName}/quote?token=${publicToken}`
+        url: `https://cloud.iexapis.com/stable/stock/${stockName}/quote?token=${secretKey}`
     })
         .then(responce => {
             res.json(responce.data);
