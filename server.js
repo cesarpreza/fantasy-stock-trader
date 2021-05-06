@@ -1,12 +1,12 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+require('dotenv').config();
 const port = process.env.PORT || 3000;
-const testPublicToken = process.env.TEST_PUBLIC_KEY;
+const testPublicKey = process.env.TEST_PUBLIC_KEY;
 const testSecretKey = process.env.TEST_SECRET_KEY;
 const prodSecretKey = process.env.SECRET_KEY;
 
-require('dotenv').config();
 
 const app = express();
 
