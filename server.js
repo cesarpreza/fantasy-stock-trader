@@ -46,7 +46,7 @@ let users = [
             }
         } else {
             res.status(200).send({
-                message: 'User not found'
+                message: false
             })
         }
     });

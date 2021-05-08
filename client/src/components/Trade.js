@@ -27,8 +27,12 @@ class Trade extends Component {
             alert('Enter a stock symbol. Example: AAPL for Apple inc.');
         } else {
             axios.get(`api/stocks?stockName=${this.state.searchTerm}`)
-                .then(res => {
-                    this.setState({ stock: res.data, searchTerm: '', isStockValid: true })
+                .then((res, req) => {
+                    if (req.status === 400) {
+                        alert('please enter a valid stock');
+                    } else {
+                        this.setState({ stock: res.data, searchTerm: '', isStockValid: true })
+                    }
             })
         }
     }

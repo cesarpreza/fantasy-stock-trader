@@ -38,7 +38,8 @@ class LoginPage extends Component {
                     this.props.history.push('/dashboard')
                     this.setState({isAuth: true})
                 } else {
-                    this.setState({isAuth: false})
+                    alert('Invalid username or password')
+                    this.setState({isAuth: false, userEmail: '', userPassword: ''})
                 }
             console.log(res.data.message)
             })
