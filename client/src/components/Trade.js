@@ -28,11 +28,12 @@ class Trade extends Component {
         } else {
             axios.get(`api/stocks?stockName=${this.state.searchTerm}`)
                 .then((res, req) => {
-                    if (req.status === 400) {
-                        alert('please enter a valid stock');
-                    } else {
-                        this.setState({ stock: res.data, searchTerm: '', isStockValid: true })
-                    }
+                    this.setState({ stock: res.data, searchTerm: '', isStockValid: true })
+                    // if (req.status === 400) {
+                    //     alert('please enter a valid stock');
+                    // } else {
+                    //     this.setState({ stock: res.data, searchTerm: '', isStockValid: true })
+                    // }
             })
         }
     }
