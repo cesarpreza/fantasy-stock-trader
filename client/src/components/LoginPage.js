@@ -34,10 +34,11 @@ class LoginPage extends Component {
         }
         axios.post(`http://localhost:3000/api/auth`, request)
             .then(res => {
-                if (res.data.message) {
+                if (res.data.user) {
+                    console.log(res.data.user)
                     //add user ID to local storage.
                     this.props.history.push('/dashboard')
-                    this.setState({isAuth: true})
+                    //this.setState({isAuth: true})
                 } else {
                     alert('Invalid username or password')
                     this.setState({isAuth: false, userEmail: '', userPassword: ''})

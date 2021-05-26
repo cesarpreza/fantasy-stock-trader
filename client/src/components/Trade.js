@@ -63,7 +63,7 @@ class Trade extends Component {
                             value={this.state.searchTerm}
                             onChange={this.handleChange}
                             type='text'
-                            placeholder='example.. aapl' />
+                            placeholder='ie. AMC' />
                         <Button
                             onClick={() => this.setState({ isModalShown: true })}
                             type='submit'>Search</Button>

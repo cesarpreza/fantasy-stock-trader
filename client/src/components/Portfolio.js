@@ -21,7 +21,7 @@ class Portfolio extends Component {
         return (
             <div>
                 <div className='title-container'>
-                    <h2>Dashboard</h2>
+                    <h2>Portfolio</h2>
                 </div>
                 <div className='nav-container'>
                     <Navbar id='portfolio-nav' className='nav-dark'>
