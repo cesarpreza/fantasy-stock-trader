@@ -37,6 +37,7 @@ class LoginPage extends Component {
                 if (res.data.user) {
                     console.log(res.data.user)
                     //add user ID to local storage.
+                    localStorage.setItem('user', res.data.user)
                     this.props.history.push('/dashboard')
                     //this.setState({isAuth: true})
                 } else {

@@ -20,7 +20,7 @@ function Navbar() {
                         </li>
                         <li className='nav-item ml-auto'>
                             <Link className='nav-link' to='/'>
-                                <button className='btn btn-light btn-sm'>Log Out</button>
+                                <button onClick={() => localStorage.clear()} className='btn btn-light btn-sm'>Log Out</button>
                             </Link>
                         </li>
                     </ul>

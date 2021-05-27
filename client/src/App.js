@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import LoginPage from './components/LoginPage';
 import Portfolio from './components/Portfolio';
 import Trade from './components/Trade';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
         <Navbar />
           <Switch>
             <Route path='/' exact component={LoginPage} />
-            <Route path='/dashboard' exact component={Portfolio} />
-            <Route path='/trade' exact component={Trade} />
+            <ProtectedRoute path='/dashboard' exact component={Portfolio} />
+            <ProtectedRoute path='/trade' exact component={Trade} />
           </Switch>
       </Router>
     </div>
