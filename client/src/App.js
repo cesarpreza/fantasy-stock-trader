@@ -17,7 +17,7 @@ function App() {
         <Navbar />
           <Switch>
             <Route path='/' exact component={LoginPage} />
-            <Route path='/dashboard' exact component={Portfolio} />
+            <ProtectedRoute userId={userId} path='/dashboard' exact component={Portfolio} />
             <ProtectedRoute userId={userId} path='/trade' exact component={Trade} />
           </Switch>
       </Router>
