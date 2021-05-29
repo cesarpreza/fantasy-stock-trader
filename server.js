@@ -38,7 +38,7 @@ let users = [
             if (userResult.password === req.body.password) {
                 res.status(200).send({
                     message: true,
-                    user: userResult.id
+                    userId: userResult.id
                 })
             } else {
                 res.status(200).send({

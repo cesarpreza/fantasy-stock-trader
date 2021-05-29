@@ -7,8 +7,7 @@ class LoginPage extends Component {
         super(props);
         this.state = {
             userEmail: '',
-            userPassword: '',
-            isAuth: false
+            userPassword: ''
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -34,17 +33,14 @@ class LoginPage extends Component {
         }
         axios.post(`http://localhost:3000/api/auth`, request)
             .then(res => {
-                if (res.data.user) {
-                    console.log(res.data.user)
-                    //add user ID to local storage.
-                    localStorage.setItem('user', res.data.user)
-                    this.props.history.push('/dashboard')
-                    //this.setState({isAuth: true})
+                if (res.data.userId) {
+                    console.log(`user ID is: ${res.data.userId}`)
+                    localStorage.setItem('userId', res.data.userId)
+                    //this.props.history.push('/dashboard')
                 } else {
                     alert('Invalid username or password')
-                    this.setState({isAuth: false, userEmail: '', userPassword: ''})
+                    this.setState({userEmail: '', userPassword: ''})
                 }
-            console.log(res.data.message)
             })
             .catch(err => {
                 console.log(err)
@@ -52,7 +48,7 @@ class LoginPage extends Component {
     }
     
     render() {
-        console.log(this.state.userEmail, this.state.userPassword, `isAuth is: ${this.state.isAuth}`)
+        console.log(this.state.userEmail, this.state.userPassword)
         return (
             <div className='login-container'>
                 <div>

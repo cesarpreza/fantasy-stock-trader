@@ -8,24 +8,21 @@ import Trade from './components/Trade';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
+
+  const userId = localStorage.getItem('userId');
+
   return (
     <div className="App">
       <Router>
         <Navbar />
           <Switch>
             <Route path='/' exact component={LoginPage} />
-            <ProtectedRoute path='/dashboard' exact component={Portfolio} />
-            <ProtectedRoute path='/trade' exact component={Trade} />
+            <Route path='/dashboard' exact component={Portfolio} />
+            <ProtectedRoute userId={userId} path='/trade' exact component={Trade} />
           </Switch>
       </Router>
     </div>
   );
 }
-
-//next Steps: Implement dummy data to login a user
-  //Use React Router to create a protected route.
-  //if the user is authorized (state),
-  // return() the Component. 
-  // else return the login screen. 
 
 export default App;
