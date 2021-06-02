@@ -9,16 +9,14 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
 
-  const userId = localStorage.getItem('userId');
-
   return (
     <div className="App">
       <Router>
         <Navbar />
           <Switch>
             <Route path='/' exact component={LoginPage} />
-            <ProtectedRoute userId={userId} path='/dashboard' exact component={Portfolio} />
-            <ProtectedRoute userId={userId} path='/trade' exact component={Trade} />
+            <ProtectedRoute path='/dashboard' exact component={Portfolio} />
+            <ProtectedRoute path='/trade' exact component={Trade} />
           </Switch>
       </Router>
     </div>
