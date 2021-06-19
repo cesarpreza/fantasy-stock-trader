@@ -82,7 +82,7 @@ class LoginPage extends Component {
                         <div id='form-buttons'>
                             <Button className='btn btn-sm' type='submit'>Login</Button>
                             <p>or</p>
-                            <Button className='btn btn-sm'>Sign Up</Button>
+                            <Button className='btn btn-sm' onClick={() => {console.log('buttonpressed')}}  >Sign Up</Button>
                         </div>
                     </Form>
                 </div>

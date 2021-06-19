@@ -20,12 +20,14 @@ console.log('listening on port 3000');
 let users = [
     {
         id: 1,
+        name: 'Cesar',
         userName: 'user1',
         email: 'abc@email.com',
         password: 'abc'
     },
     {
         id: 2,
+        name: 'Cheese',
         userName: 'user2',
         email: '123@email.com',
         password: '123'

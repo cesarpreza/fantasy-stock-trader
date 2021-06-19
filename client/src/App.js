@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import LoginPage from './components/LoginPage';
 import Portfolio from './components/Portfolio';
 import Trade from './components/Trade';
+import Registration from './components/Registration';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
       <Router>
         <Navbar />
           <Switch>
-            <Route path='/' exact component={LoginPage} />
+          <Route path='/' exact component={LoginPage} />
+          <Route path='/register' exact component={Register} /> 
             <ProtectedRoute path='/dashboard' exact component={Portfolio} />
             <ProtectedRoute path='/trade' exact component={Trade} />
           </Switch>
