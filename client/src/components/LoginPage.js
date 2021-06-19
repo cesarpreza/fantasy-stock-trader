@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -10,6 +11,11 @@ class LoginPage extends Component {
             userPassword: ''
         }
         this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleSignUp = e => {
+        e.preventDefault;
+        console.log('button pressed');
     }
 
     
@@ -80,9 +86,12 @@ class LoginPage extends Component {
                             </Col>
                         </Form.Group>
                         <div id='form-buttons'>
-                            <Button className='btn btn-sm' type='submit'>Login</Button>
+                            <button className='btn btn-sm' type='submit'>Login</button>
                             <p>or</p>
-                            <Button className='btn btn-sm' onClick={() => {console.log('buttonpressed')}}  >Sign Up</Button>
+                            <Link className='signup-link' to='/register'>
+                                <button className='btn btn-sm' onClick={ () => {console.log('register button clicked')} }  >Sign Up</button>
+                            </Link>
+                            {/*Link to registration form! does not work. */}
                         </div>
                     </Form>
                 </div>

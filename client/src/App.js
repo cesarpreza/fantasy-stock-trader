@@ -16,11 +16,12 @@ function App() {
         <Navbar />
           <Switch>
           <Route path='/' exact component={LoginPage} />
-          <Route path='/register' exact component={Register} /> 
+          <Route path='/register' exact component={Registration} /> {/*create registration form route! not inside of the navbar routes */}
             <ProtectedRoute path='/dashboard' exact component={Portfolio} />
             <ProtectedRoute path='/trade' exact component={Trade} />
           </Switch>
       </Router>
+
     </div>
   );
 }
