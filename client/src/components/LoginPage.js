@@ -86,10 +86,10 @@ class LoginPage extends Component {
                             </Col>
                         </Form.Group>
                         <div id='form-buttons'>
-                            <button className='btn btn-sm' type='submit'>Login</button>
+                            <Button className='btn btn-sm' type='submit'>Login</Button>
                             <p>or</p>
                             <Link className='signup-link' to='/register'>
-                                <button className='btn btn-sm' onClick={ () => {console.log('register button clicked')} }  >Sign Up</button>
+                                <Button className='btn btn-sm' onClick={ () => {console.log('register button clicked')} }  >Sign Up</Button>
                             </Link>
                             {/*Link to registration form! does not work. */}
                         </div>
