@@ -71,7 +71,7 @@ class LoginPage extends Component {
                                     name='userEmail'
                                     onChange={this.handleChange}
                                     type='email'
-                                    placeholder='enter email'
+                                    placeholder='email@email.com'
                                     value={this.state.userEmail} />
                             </Col>
                         </Form.Group>
