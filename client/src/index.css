@@ -55,3 +55,9 @@ table {
 	justify-content: space-evenly;
 	margin: 10;
 }
+
+.registration-form {
+	background-color: aqua;
+	margin: 10%;
+	padding: 15px;
+}
