@@ -20,7 +20,7 @@ console.log('listening on port 3000');
 
 
 //DB ROUTES
-app.get('/user', async (req, res) => {
+app.get('/api/auth', async (req, res) => {
     const getUser = await pool.query('SELECT * FROM stock_user');
     res.json(getUser.rows);
 })
