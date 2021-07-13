@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+const pool = require('./db');
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 const testPublicKey = process.env.TEST_PUBLIC_KEY;
@@ -16,6 +17,14 @@ app.use('/', express.static(path.join(__dirname, 'client/build')));
 
 app.listen(3000);
 console.log('listening on port 3000');
+
+
+//DB ROUTES
+app.get('/user', async (req, res) => {
+    const getUser = await pool.query('SELECT * FROM stock_user');
+    res.json(getUser.rows);
+})
+
 
 let users = [
     {
