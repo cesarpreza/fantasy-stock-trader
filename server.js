@@ -23,6 +23,17 @@ console.log('listening on port 3000');
 app.get('/api/auth', async (req, res) => {
     const getUser = await pool.query('SELECT * FROM stock_user');
     res.json(getUser.rows);
+});
+
+app.post('/api/auth', async (req, res) => {
+    const { email } = req.body;
+    const postItem = await pool.query('SELECT email FROM stock_user WHERE email = $1;', [email]);
+    if (postItem.rows.length !== 0) {
+        console.log('user already exists');
+    } else {
+        console.log('user does not exist');
+    }
+    res.json(postItem.rows);
 })
 
 
@@ -43,25 +54,25 @@ let users = [
     }
 ]
 
-    app.post('/api/auth', (req, res) => {
-        let userResult = users.find(user => user.email === req.body.email);
-        if (userResult) {
-            if (userResult.password === req.body.password) {
-                res.status(200).send({
-                    message: true,
-                    userId: userResult.id
-                })
-            } else {
-                res.status(200).send({
-                    message: false
-                })
-            }
-        } else {
-            res.status(200).send({
-                message: false
-            })
-        }
-    });
+    // app.post('/api/auth', (req, res) => {
+    //     let userResult = users.find(user => user.email === req.body.email);
+    //     if (userResult) {
+    //         if (userResult.password === req.body.password) {
+    //             res.status(200).send({
+    //                 message: true,
+    //                 userId: userResult.id
+    //             })
+    //         } else {
+    //             res.status(200).send({
+    //                 message: false
+    //             })
+    //         }
+    //     } else {
+    //         res.status(200).send({
+    //             message: false
+    //         })
+    //     }
+    // });
 
 app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName
