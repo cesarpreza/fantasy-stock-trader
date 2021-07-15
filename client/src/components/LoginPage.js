@@ -41,7 +41,7 @@ class LoginPage extends Component {
             .then(res => {
                 if (res.data.userId) {
                     console.log(`user ID is: ${res.data.userId}`)
-                    localStorage.setItem('userId', res.data.userId)
+                    // localStorage.setItem('userId', res.data.userId)
                     this.props.history.push('/dashboard')
                 } else {
                     alert('Invalid username or password')

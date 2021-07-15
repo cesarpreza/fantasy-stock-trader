@@ -26,33 +26,38 @@ app.get('/api/auth', async (req, res) => {
 });
 
 app.post('/api/auth', async (req, res) => {
-    const { email } = req.body;
-    const postItem = await pool.query('SELECT email FROM stock_user WHERE email = $1;', [email]);
-    if (postItem.rows.length !== 0) {
-        console.log('user already exists');
+    const { email, password} = req.body;
+    const userInfo = await pool.query('SELECT user_id, first_name, last_name, email FROM stock_user WHERE email = $1 AND password = $2;', [email, password]);
+    //STEP 1: check if the user email exists in the DB 
+    if (userInfo.rows.length !== 0) {
+        res.json(userInfo.rows);
+    //STEP 2: check if passwords match.
+
+    // if password matched then allow user to login to the app.
+        // else display message of 'incorrect email or password
     } else {
-        console.log('user does not exist');
+        res.status(401).send('user does not exist');
     }
-    res.json(postItem.rows);
+    //res.json(postItem.rows);
 })
 
 
-let users = [
-    {
-        id: 1,
-        name: 'Cesar',
-        userName: 'user1',
-        email: 'abc@email.com',
-        password: 'abc'
-    },
-    {
-        id: 2,
-        name: 'Cheese',
-        userName: 'user2',
-        email: '123@email.com',
-        password: '123'
-    }
-]
+// let users = [
+//     {
+//         id: 1,
+//         name: 'Cesar',
+//         userName: 'user1',
+//         email: 'abc@email.com',
+//         password: 'abc'
+//     },
+//     {
+//         id: 2,
+//         name: 'Cheese',
+//         userName: 'user2',
+//         email: '123@email.com',
+//         password: '123'
+//     }
+// ]
 
     // app.post('/api/auth', (req, res) => {
     //     let userResult = users.find(user => user.email === req.body.email);
