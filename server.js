@@ -27,57 +27,14 @@ app.get('/api/auth', async (req, res) => {
 
 app.post('/api/auth', async (req, res) => {
     const { email, password} = req.body;
-    const userInfo = await pool.query('SELECT user_id, first_name, last_name, email FROM stock_user WHERE email = $1 AND password = $2;', [email, password]);
-    //STEP 1: check if the user email exists in the DB 
+    console.log(email);
+    const userInfo = await pool.query('SELECT * FROM stock_user WHERE email = $1;', [email]);
     if (userInfo.rows.length !== 0) {
-        res.json(userInfo.rows);
-    //STEP 2: check if passwords match.
-
-    // if password matched then allow user to login to the app.
-        // else display message of 'incorrect email or password
+        res.json(userInfo.rows[0].user_id);
     } else {
         res.status(401).send('user does not exist');
     }
-    //res.json(postItem.rows);
 })
-
-
-// let users = [
-//     {
-//         id: 1,
-//         name: 'Cesar',
-//         userName: 'user1',
-//         email: 'abc@email.com',
-//         password: 'abc'
-//     },
-//     {
-//         id: 2,
-//         name: 'Cheese',
-//         userName: 'user2',
-//         email: '123@email.com',
-//         password: '123'
-//     }
-// ]
-
-    // app.post('/api/auth', (req, res) => {
-    //     let userResult = users.find(user => user.email === req.body.email);
-    //     if (userResult) {
-    //         if (userResult.password === req.body.password) {
-    //             res.status(200).send({
-    //                 message: true,
-    //                 userId: userResult.id
-    //             })
-    //         } else {
-    //             res.status(200).send({
-    //                 message: false
-    //             })
-    //         }
-    //     } else {
-    //         res.status(200).send({
-    //             message: false
-    //         })
-    //     }
-    // });
 
 app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName
