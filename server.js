@@ -26,13 +26,15 @@ app.get('/api/auth', async (req, res) => {
 });
 
 app.post('/api/auth', async (req, res) => {
-    const { email, password} = req.body;
+    const { email, password } = req.body;
     console.log(email);
-    const userInfo = await pool.query('SELECT * FROM stock_user WHERE email = $1;', [email]);
+    const userInfo = await pool.query('SELECT * FROM stock_user WHERE email = $1 AND password=$2;', [email, password]);
     if (userInfo.rows.length !== 0) {
-        res.json(userInfo.rows[0].user_id);
+        res.status(200).send({
+            userId: userInfo.rows[0].user_id
+        })
     } else {
-        res.status(401).send('user does not exist');
+        res.status(200).send('user does not exist or incorrect email/password');
     }
 })
 
@@ -42,8 +44,8 @@ app.get('/api/stocks', (req, res) => {
         method: 'get',
         url: `https://sandbox.iexapis.com/stable/stock/${stockName}/quote?token=${testSecretKey}`
     })
-        .then(responce => {
-            res.json(responce.data);
+        .then(response => {
+            res.json(response.data);
         }).catch(err => {
         console.log(err.message)
     })

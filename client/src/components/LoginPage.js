@@ -40,7 +40,7 @@ class LoginPage extends Component {
         axios.post(`http://localhost:3000/api/auth`, request)
             .then(res => {
                 console.log(res);
-                if (res.data) {
+                if (res.data.userId) {
                     console.log(`user ID is: ${res.data}`)
                     localStorage.setItem('userId', res.data.userId)
                     this.props.history.push('/dashboard')
