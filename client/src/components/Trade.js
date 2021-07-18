@@ -15,6 +15,7 @@ class Trade extends Component {
             accountBalance: 10000,
             holdingValue: 0
         }
+        this.handleErrors = this.handleErrors.bind(this);
     }
 
     handleChange = e => {
