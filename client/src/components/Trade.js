@@ -26,10 +26,23 @@ class Trade extends Component {
         if (this.state.searchTerm === '') {
             alert('Enter a stock symbol. Example: AAPL for Apple inc.');
         } else {
-            axios.get(`api/stocks?stockName=${this.state.searchTerm}`)
+            axios.get("api/stocks", {
+                params: {
+                    stockName: this.state.searchTerm
+                }
+            })
                 .then((res, req) => {
                     this.setState({ stock: res.data, searchTerm: '', isStockValid: true });
-            })
+                }) .catch(this.handleErrors);
+            
+        }
+    }
+
+    handleErrors(err) {
+        if (err.response) {
+            console.log('error with response', err.response.status);
+        } else if (err.request) {
+            console.log(err.message);
         }
     }
 
