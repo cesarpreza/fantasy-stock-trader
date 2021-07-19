@@ -22,25 +22,26 @@ class Trade extends Component {
         this.setState({ searchTerm: e.target.value })
     }
 
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
-        if (this.state.searchTerm === '') {
-            alert('Enter a stock symbol. Example: AAPL for Apple inc.');
-        } else {
-            axios.get("api/stocks", {
+        if (this.state.searchTerm !== '') {
+            await axios.get("api/stocks", {
                 params: {
                     stockName: this.state.searchTerm
                 }
             })
                 .then((res, req) => {
-                    this.setState({ stock: res.data, searchTerm: '', isStockValid: true });
-                }) .catch(this.handleErrors);
+                        this.setState({ stock: res.data, searchTerm: '', isStockValid: true });
+                        console.log(res.status);
+                }).catch(() => { this.handleErrors });
             
+            } else {
+                alert('Enter a stock symbol. Example: AAPL for Apple inc.');
         }
     }
 
     handleErrors(err) {
-        if (err.response) {
+        if (err.responce) {
             console.log('error with response', err.response.status);
         } else if (err.request) {
             console.log(err.message);

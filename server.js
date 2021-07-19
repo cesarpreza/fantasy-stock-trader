@@ -47,7 +47,8 @@ app.get('/api/stocks', (req, res) => {
         .then(response => {
             res.json(response.data);
         }).catch(err => {
-        console.log(err.message)
+            console.log(err.message);
+            res.send(err);
     })
 })
 
