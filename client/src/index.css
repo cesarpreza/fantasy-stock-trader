@@ -53,7 +53,7 @@ nav {
 	width: 100px;
 }
 
-th {
+.stock-titles {
 	justify-content: space-around;
 }
 
@@ -61,7 +61,7 @@ th {
 	margin: 25px auto;
 }
 
-table {
+.holdings-table {
 	display: flex;
 	justify-content: space-evenly;
 	margin: 10;

@@ -82,29 +82,46 @@ class Trade extends Component {
                             type='submit'>Search</Button>
                     </Form>
                 </div>
-                <div className='searched-stock'>
-                    {this.state.isStockValid ?
-                        <li> {this.state.stock.symbol} </li> //when a stock is searched, Show the stock info on the trade page
-                                                            // Use a div to center the stock information, On the right 
-                                                            // Have a button the says "Buy" to initiate a modal pop up buy transaction.
-                        
-                        // <StockModal
-                        //     show={this.state.isModalShown}
-                        //     companyName={this.state.stock.companyName}
-                        //     stockSymbol={this.state.stock.symbol}
-                        //     stockPrice={this.state.stock.latestPrice}
-                        //     closeModal={this.closeModal}
-                        //     accountBalance={this.state.accountBalance}
-                        // /> 
+                <div className='searched-stock-container'>
+                        <table className='stock-table'>
+                            <thead>
+                                <tr>
+                                    <th scope='col'>Company</th>
+                                    <th scope='col'>Symbol</th>
+                                    <th scope='col'>Last Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {this.state.isStockValid ?
+                                <tr>
+                                    <td> {this.state.stock.companyName} </td>
+                                    <td> {this.state.stock.symbol} </td>
+                                    <td> {this.state.stock.latestPrice} </td>
+                                </tr>
+                                    : null}
+                            </tbody>
+                        </table>
+                        {/* when a stock is searched, Show the stock info on the trade page
+                        Use a div to center the stock information, On the right 
+                        Have a button the says "Buy" to initiate a modal pop up buy transaction. */}
+                    {/* {this.state.isStockValid ?
+                        <StockModal
+                            show={this.state.isModalShown}
+                            companyName={this.state.stock.companyName}
+                            stockSymbol={this.state.stock.symbol}
+                            stockPrice={this.state.stock.latestPrice}
+                            closeModal={this.closeModal}
+                            accountBalance={this.state.accountBalance}
+                        /> 
                         :
                             null
-                    }
+                    } */}
                 </div>
                 <div className='holdings'>
                 <Card>
                             <Card.Body>
                                 <Card.Title>Stock Holdings</Card.Title>
-                                    <table className='stock-table'>
+                                    <table className='holdings-table'>
                                         <thead>
                                             <tr>
                                                 <th>Stock Symbol</th>

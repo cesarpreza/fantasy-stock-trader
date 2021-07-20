@@ -37,13 +37,13 @@ class Portfolio extends Component {
                         <Card>
                             <Card.Body>
                                 <Card.Title>Stocks</Card.Title>
-                                    <table>
+                                    <table className='holdings-table'>
                                         <thead>
                                             <tr className='stock-info'>
-                                                <th>Stock Symbol</th>
-                                                <th>Price</th>
-                                                <th>Shares</th>
-                                                <th>Holding Value</th>
+                                                <th className='stock-titles'>Stock Symbol</th>
+                                                <th className='stock-titles'>Price</th>
+                                                <th className='stock-titles'>Shares</th>
+                                                <th className='stock-titles'>Holding Value</th>
                                                 </tr>
                                     </thead>
                                         <tbody>
