@@ -32,8 +32,11 @@ class Trade extends Component {
             })
                 .then((res, req) => {
                         this.setState({ stock: res.data, searchTerm: '', isStockValid: true });
-                        console.log(res.status);
-                }).catch(() => { this.handleErrors });
+                        console.log(res);
+                }).catch(() => {
+                    alert('please enter a vaoid stock');
+                    this.setState({ stock: [], searchTerm: '', isStockValid: false })
+                });
             
             } else {
                 alert('Enter a stock symbol. Example: AAPL for Apple inc.');
