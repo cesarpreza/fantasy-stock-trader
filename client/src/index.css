@@ -6,6 +6,10 @@
 	padding-top: 30px;
 }
 
+.holdings {
+	margin-top: 15px;
+}
+
 .holdings-container {
 	margin: 25px auto;
 }
@@ -36,6 +40,13 @@ nav {
 	height: 40px;
 	margin: auto;
 	width: 80%;
+}
+
+.searched-stock-container {
+	background-color: blue;
+	height: 25vh;
+	margin-top: 20px;
+	width: auto;
 }
 
 .stocks {

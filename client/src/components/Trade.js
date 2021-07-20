@@ -34,7 +34,7 @@ class Trade extends Component {
                         this.setState({ stock: res.data, searchTerm: '', isStockValid: true });
                         console.log(res);
                 }).catch(() => {
-                    alert('please enter a vaoid stock');
+                    alert('The stock you entered could not be found. Please enter a valid stock symbol.');
                     this.setState({ stock: [], searchTerm: '', isStockValid: false })
                 });
             
@@ -82,20 +82,25 @@ class Trade extends Component {
                             type='submit'>Search</Button>
                     </Form>
                 </div>
-                <div>
+                <div className='searched-stock'>
                     {this.state.isStockValid ?
-                        <StockModal
-                            show={this.state.isModalShown}
-                            companyName={this.state.stock.companyName}
-                            stockSymbol={this.state.stock.symbol}
-                            stockPrice={this.state.stock.latestPrice}
-                            closeModal={this.closeModal}
-                            accountBalance={this.state.accountBalance}
-                        /> :
+                        <li> {this.state.stock.symbol} </li> //when a stock is searched, Show the stock info on the trade page
+                                                            // Use a div to center the stock information, On the right 
+                                                            // Have a button the says "Buy" to initiate a modal pop up buy transaction.
+                        
+                        // <StockModal
+                        //     show={this.state.isModalShown}
+                        //     companyName={this.state.stock.companyName}
+                        //     stockSymbol={this.state.stock.symbol}
+                        //     stockPrice={this.state.stock.latestPrice}
+                        //     closeModal={this.closeModal}
+                        //     accountBalance={this.state.accountBalance}
+                        // /> 
+                        :
                             null
                     }
                 </div>
-                <div>
+                <div className='holdings'>
                 <Card>
                             <Card.Body>
                                 <Card.Title>Stock Holdings</Card.Title>

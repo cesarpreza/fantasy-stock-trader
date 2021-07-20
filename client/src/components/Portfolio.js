@@ -29,7 +29,7 @@ class Portfolio extends Component {
                         <p className='balances'>Total Holding Value: ${this.state.totalHoldings}</p>
                     </Navbar>
                 </div>
-                <div>
+                <div className='holdings'>
                     <div className='holdings-container'>
                         <h3>Current Holdings</h3>
                     </div>
