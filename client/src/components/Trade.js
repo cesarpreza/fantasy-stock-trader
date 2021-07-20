@@ -97,6 +97,7 @@ class Trade extends Component {
                                     <td> {this.state.stock.companyName} </td>
                                     <td> {this.state.stock.symbol} </td>
                                     <td> {this.state.stock.latestPrice} </td>
+                                    <Button>Buy/Sell</Button>
                                 </tr>
                                     : null}
                             </tbody>
