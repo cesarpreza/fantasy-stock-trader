@@ -73,7 +73,7 @@ class Trade extends Component {
                     </Form>
                 </div>
                 <div className='searched-stock-container'>
-                        <table className='stock-table'>
+                        <table className='table'>
                             <thead>
                                 <tr>
                                     <th scope='col'>Company</th>
