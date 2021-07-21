@@ -15,7 +15,6 @@ class Trade extends Component {
             accountBalance: 10000,
             holdingValue: 0
         }
-        this.handleErrors = this.handleErrors.bind(this);
     }
 
     handleChange = e => {
@@ -43,22 +42,14 @@ class Trade extends Component {
         }
     }
 
-    handleErrors(err) {
-        if (err.responce) {
-            console.log('error with response', err.response.status);
-        } else if (err.request) {
-            console.log(err.message);
-        }
-    }
-
     closeModal = () => {
-        this.setState({isModalShown: false, isStockValid: false})
+        this.setState({isModalShown: false})
     }
 
     render() {
-        console.log(this.state.searchTerm)
         console.log(this.state.stock)
         console.log(this.state.isStockValid)
+        console.log(this.state.isModalShown)
         return (
             <div>
                 <div>
@@ -78,7 +69,6 @@ class Trade extends Component {
                             type='text'
                             placeholder='ie. AMC' />
                         <Button
-                            onClick={() => this.setState({ isModalShown: true })}
                             type='submit'>Search</Button>
                     </Form>
                 </div>
@@ -97,7 +87,10 @@ class Trade extends Component {
                                     <td> {this.state.stock.companyName} </td>
                                     <td> {this.state.stock.symbol} </td>
                                     <td> {this.state.stock.latestPrice} </td>
-                                    <Button>Buy/Sell</Button>
+                                    <td> 
+                                        <Button onClick={() => this.setState({ isModalShown: true })}>
+                                            Buy/Sell</Button>
+                                    </td>
                                 </tr>
                                     : null}
                             </tbody>
@@ -105,7 +98,7 @@ class Trade extends Component {
                         {/* when a stock is searched, Show the stock info on the trade page
                         Use a div to center the stock information, On the right 
                         Have a button the says "Buy" to initiate a modal pop up buy transaction. */}
-                    {/* {this.state.isStockValid ?
+                    {this.state.stock ?
                         <StockModal
                             show={this.state.isModalShown}
                             companyName={this.state.stock.companyName}
@@ -116,7 +109,7 @@ class Trade extends Component {
                         /> 
                         :
                             null
-                    } */}
+                    }
                 </div>
                 <div className='holdings'>
                 <Card>
