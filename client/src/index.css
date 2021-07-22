@@ -43,14 +43,25 @@ nav {
 }
 
 .searched-stock-container {
+	display: flex;
+	justify-content: center;
 	background-color: rgb(152, 152, 255);
-	height: 25vh;
+	height: 35vh;
 	margin-top: 20px;
 	width: auto;
 }
 
 .stocks {
 	width: 100px;
+}
+
+.stock-card {
+	height: 35vh;
+	width: 30rem;
+}
+
+.stock-card-header {
+	font: bold;
 }
 
 .title-container {

@@ -76,6 +76,7 @@ class Trade extends Component {
                             type='text'
                             placeholder='ie. AMC' />
                         <Button
+                            variant='secondary'
                             type='submit'>Search</Button>
                     </Form>
                 </div>
