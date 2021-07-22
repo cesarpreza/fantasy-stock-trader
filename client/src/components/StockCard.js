@@ -8,7 +8,7 @@ function StockCard(props) {
                 <Card.Header style={{ fontFamily: 'monaco', fontWeight: 'bold', fontSize: '20px' }}> {props.companyName} </Card.Header>
                 <Card.Body>
                     {/* <Card.Title> {props.companyName} </Card.Title> */}
-                    <Card.Title> ${props.latestPrice} </Card.Title>
+                    <Card.Title style={{fontSize: '30px'}}> ${props.latestPrice} </Card.Title>
                     <Card.Subtitle> {props.change} today </Card.Subtitle>
                     <Card.Text> 52 Week High: ${props.fiftytwoWeekHigh} 52 Week Low: ${props.fiftytwoWeeklow} </Card.Text>
                     <Card.Text> Previous Close: ${props.previousClose} </Card.Text>
