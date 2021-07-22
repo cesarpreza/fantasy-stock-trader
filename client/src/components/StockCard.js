@@ -5,12 +5,12 @@ function StockCard(props) {
     return (
         <div>
             <Card>
-                <Card.Header> Price for {props.latestTime} </Card.Header>
+                <Card.Header> {props.companyName} </Card.Header>
                 <Card.Body>
-                    <Card.Title> {props.companyName} </Card.Title>
-                    <Card.Subtitle> 52 Week High: ${props.fiftytwoWeekHigh} 52 Week Low: ${props.fiftytwoWeeklow} </Card.Subtitle>
+                    {/* <Card.Title> {props.companyName} </Card.Title> */}
+                    <Card.Title> ${props.latestPrice} {props.change} today </Card.Title>
+                    <Card.Text> 52 Week High: ${props.fiftytwoWeekHigh} 52 Week Low: ${props.fiftytwoWeeklow} </Card.Text>
                     <Card.Text> Previous Close: ${props.previousClose} </Card.Text>
-                    <Card.Text> Current Price: ${props.latestPrice} {props.change} </Card.Text>
                     <Button className='btn btn-primary-md' onClick={props.showModal} >Buy/Sell</Button>
                 </Card.Body>
             </Card>
