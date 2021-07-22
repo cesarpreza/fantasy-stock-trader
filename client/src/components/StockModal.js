@@ -11,10 +11,12 @@ function StockModal(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <p>Stock price: ${props.stockPrice} </p>
-                    
+                    <input required type='number' style={{ width: '65px' }} />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button>Buy</Button>
+                    <Button onClick={() => {
+                        console.log('buy button clicked')
+                    }}>Buy</Button>
                     <Button variant='warning'>Sell</Button>
                     <Button className='btn btn-secondary' onClick={props.closeModal}>Close</Button>
                 </Modal.Footer>

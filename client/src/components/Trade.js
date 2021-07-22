@@ -91,33 +91,8 @@ class Trade extends Component {
                             change={this.state.stock.change}
                             previousClose={this.state.stock.previousClose}
                             showModal={this.showModal}
-                    /> : null }
+                        /> : null}
                     
-                        {/* <table className='table'>
-                            <thead>
-                                <tr>
-                                    <th scope='col'>Company</th>
-                                    <th scope='col'>Symbol</th>
-                                    <th scope='col'>Last Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            {this.state.isStockValid ?
-                                <tr>
-                                    <td> {this.state.stock.companyName} </td>
-                                    <td> {this.state.stock.symbol} </td>
-                                    <td> ${this.state.stock.latestPrice} </td>
-                                    <td> 
-                                        <Button onClick={() => this.setState({ isModalShown: true })}>
-                                            Buy/Sell</Button>
-                                    </td>
-                                </tr>
-                                    : null}
-                            </tbody>
-                        </table> */}
-                        {/* when a stock is searched, Show the stock info on the trade page
-                        Use a div to center the stock information, On the right 
-                        Have a button the says "Buy" to initiate a modal pop up buy transaction. */}
                     {this.state.stock ?
                         <StockModal
                             show={this.state.isModalShown}
@@ -132,29 +107,6 @@ class Trade extends Component {
                     }
                 </div>
                 <div className='holdings'>
-                {/* <Card>
-                            <Card.Body>
-                                <Card.Title>Stock Holdings</Card.Title>
-                                    <table className='holdings-table'>
-                                        <thead>
-                                            <tr>
-                                                <th>Stock Symbol</th>
-                                                <th>Price</th>
-                                                <th>Shares</th>
-                                                <th>Holding Value</th>
-                                                </tr>
-                                    </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td>$</td>
-                                                <td>{this.state.shares}</td>
-                                                <td>${this.state.holdingValue}</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                            </Card.Body>
-                        </Card> */}
                 </div>
             </div>
         )
