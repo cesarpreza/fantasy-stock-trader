@@ -60,10 +60,10 @@ class LoginPage extends Component {
             <div className='login-container'>
                 <div>
                     <Form id='login-form' onSubmit={e => this.handleSubmit(e)} >
-                        <h1>Stock Traders</h1>
-                        <h5>Welcome to my fantasy stock trading application. Once logged in you will be able to
-                            buy and sell stocks using real time data from the IEX Cloud API.
-                        </h5>
+                        <h1>Rocket Traders</h1>
+                        <p>Welcome to my fantasy stock trading application. Once logged in you will be able to
+                            buy and sell stocks with fantasy money using real time data from the IEX Cloud API. Login and test your market skills.
+                        </p>
                         <Form.Group className='email-input' as={Row}>
                             <Form.Label column sm={3}>Email</Form.Label>
                             <Col sm={8}>

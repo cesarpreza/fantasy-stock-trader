@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
 function StockCard(props) {
-    console.log(props.companyName)
     return (
         <div>
             <Card>
