@@ -43,7 +43,7 @@ nav {
 }
 
 .searched-stock-container {
-	background-color: blue;
+	background-color: rgb(152, 152, 255);
 	height: 25vh;
 	margin-top: 20px;
 	width: auto;

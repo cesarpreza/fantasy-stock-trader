@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import StockModal from './StockModal';
 import { Button, Form, Card, Navbar } from 'react-bootstrap';
 import axios from 'axios';
+import StockCard from './StockCard';
 
 class Trade extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class Trade extends Component {
             })
                 .then((res, req) => {
                         this.setState({ stock: res.data, searchTerm: '', isStockValid: true });
-                        console.log(res);
+                        console.log(res.data);
                 }).catch(() => {
                     alert('The stock you entered could not be found. Please enter a valid stock symbol.');
                     this.setState({ stock: [], searchTerm: '', isStockValid: false })
@@ -73,7 +74,15 @@ class Trade extends Component {
                     </Form>
                 </div>
                 <div className='searched-stock-container'>
-                        <table className='table'>
+                    {this.state.isStockValid ? 
+                        <StockCard
+                            companyName={this.state.stock.companyName}
+                            latestTime={this.state.stock.latestTime}
+                            fiftytwoWeekHigh={this.state.stock.week52High}
+                            fiftytwoWeeklow={this.state.stock.week52Low}
+                    /> : null }
+                    
+                        {/* <table className='table'>
                             <thead>
                                 <tr>
                                     <th scope='col'>Company</th>
@@ -86,7 +95,7 @@ class Trade extends Component {
                                 <tr>
                                     <td> {this.state.stock.companyName} </td>
                                     <td> {this.state.stock.symbol} </td>
-                                    <td> {this.state.stock.latestPrice} </td>
+                                    <td> ${this.state.stock.latestPrice} </td>
                                     <td> 
                                         <Button onClick={() => this.setState({ isModalShown: true })}>
                                             Buy/Sell</Button>
@@ -94,7 +103,7 @@ class Trade extends Component {
                                 </tr>
                                     : null}
                             </tbody>
-                        </table>
+                        </table> */}
                         {/* when a stock is searched, Show the stock info on the trade page
                         Use a div to center the stock information, On the right 
                         Have a button the says "Buy" to initiate a modal pop up buy transaction. */}
@@ -112,7 +121,7 @@ class Trade extends Component {
                     }
                 </div>
                 <div className='holdings'>
-                <Card>
+                {/* <Card>
                             <Card.Body>
                                 <Card.Title>Stock Holdings</Card.Title>
                                     <table className='holdings-table'>
@@ -126,15 +135,15 @@ class Trade extends Component {
                                     </thead>
                                         <tbody>
                                             <tr>
-                                                {/* <td></td>
+                                                <td></td>
                                                 <td>$</td>
                                                 <td>{this.state.shares}</td>
-                                                <td>${this.state.holdingValue}</td> */}
+                                                <td>${this.state.holdingValue}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                             </Card.Body>
-                        </Card>
+                        </Card> */}
                 </div>
             </div>
         )
