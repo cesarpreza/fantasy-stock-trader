@@ -47,6 +47,12 @@ class Trade extends Component {
         this.setState({isModalShown: false})
     }
 
+    showModal = () => {
+        this.setState({
+            isModalShown: true
+        })
+    }
+
     render() {
         console.log(this.state.stock)
         console.log(this.state.isStockValid)
@@ -80,6 +86,10 @@ class Trade extends Component {
                             latestTime={this.state.stock.latestTime}
                             fiftytwoWeekHigh={this.state.stock.week52High}
                             fiftytwoWeeklow={this.state.stock.week52Low}
+                            latestPrice={this.state.stock.latestPrice}
+                            change={this.state.stock.change}
+                            previousClose={this.state.stock.previousClose}
+                            showModal={this.showModal}
                     /> : null }
                     
                         {/* <table className='table'>
