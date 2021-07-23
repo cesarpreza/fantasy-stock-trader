@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
+
 function StockModal(props) {
+    
     return (
         <div>
             <Modal show={props.show}>
@@ -14,9 +16,7 @@ function StockModal(props) {
                     <input required type='number' style={{ width: '65px' }} />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => {
-                        console.log('buy button clicked')
-                    }}>Buy</Button>
+                    <Button onClick={ props.buyButton }>Buy</Button>
                     <Button variant='warning'>Sell</Button>
                     <Button className='btn btn-secondary' onClick={props.closeModal}>Close</Button>
                 </Modal.Footer>
