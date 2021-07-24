@@ -15,7 +15,7 @@ class Trade extends Component {
             isStockValid: false,
             accountBalance: 10000,
             holdingValue: 0,
-            stockPurchased: 0
+            stockPurchased: ''
         }
     }
 
@@ -45,7 +45,7 @@ class Trade extends Component {
     }
 
     closeModal = () => {
-        this.setState({isModalShown: false})
+        this.setState({isModalShown: false, stockPurchased: ''})
     }
 
     showModal = () => {
@@ -56,6 +56,10 @@ class Trade extends Component {
 
 
     buyButton = e => {
+        const addValues = this.state.stock.latestPrice * this.state.stockPurchased
+        if (this.state.stockPurchased !== '') {
+            console.log(addValues);
+        }
         console.log('buy button clicked');
     }
 
