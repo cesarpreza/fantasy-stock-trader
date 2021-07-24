@@ -3,6 +3,7 @@ import { Button, Modal } from 'react-bootstrap';
 
 
 function StockModal(props) {
+    console.log(props.stockPurchased);
     
     return (
         <div>
@@ -13,7 +14,11 @@ function StockModal(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <p>Stock price: ${props.stockPrice} </p>
-                    <input required type='number' style={{ width: '65px' }} />
+                    <input
+                        onChange={props.handleChange}
+                        value={props.stockPurchased} name='stockPurchased'
+                        type='number'
+                        style={{ width: '65px' }} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={ props.buyButton }>Buy</Button>

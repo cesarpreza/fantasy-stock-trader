@@ -20,7 +20,7 @@ class Trade extends Component {
     }
 
     handleChange = e => {
-        this.setState({ searchTerm: e.target.value })
+        this.setState({ [e.target.name]: e.target.value })
     }
 
     handleSubmit = async e => {
@@ -54,15 +54,14 @@ class Trade extends Component {
         })
     }
 
+
     buyButton = e => {
-        this.setState({ stockPurchased: e.target.value });
-        console.log(this.state.stockPurchased);
         console.log('buy button clicked');
     }
 
     render() {
         console.log(this.state.stock)
-        console.log(this.state.isStockValid)
+        console.log(this.state.searchTerm)
         console.log(this.state.isModalShown)
         return (
             <div>
@@ -78,6 +77,7 @@ class Trade extends Component {
                 <div>
                     <Form onSubmit={this.handleSubmit}>
                         <input
+                            name='searchTerm'
                             value={this.state.searchTerm}
                             onChange={this.handleChange}
                             type='text'
@@ -109,6 +109,8 @@ class Trade extends Component {
                             closeModal={this.closeModal}
                             accountBalance={this.state.accountBalance}
                             buyButton={this.buyButton}
+                            handleChange={this.handleChange}
+                            value={this.state.stockPurchased}
                         /> 
                         :
                             null
