@@ -55,12 +55,17 @@ class Trade extends Component {
     }
 
 
-    buyButton = e => {
+    handlePurchase = e => {
         const addValues = this.state.stock.latestPrice * this.state.stockPurchased
         if (this.state.stockPurchased !== '') {
             console.log(addValues);
+            this.setState({stockPurchased: ''})
         }
         console.log('buy button clicked');
+    }
+
+    handleSell = e => {
+        console.log('sell button clicked')
     }
 
     render() {
@@ -111,7 +116,8 @@ class Trade extends Component {
                             stockPrice={this.state.stock.latestPrice}
                             closeModal={this.closeModal}
                             accountBalance={this.state.accountBalance}
-                            buyButton={this.buyButton}
+                            handlePurchase={this.handlePurchase}
+                            handleSell={this.handleSell}
                             handleChange={this.handleChange}
                             stockPurchased={this.state.stockPurchased}
                         /> 

@@ -21,8 +21,8 @@ function StockModal(props) {
                         style={{ width: '65px' }} />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={ props.buyButton }>Buy</Button>
-                    <Button variant='warning'>Sell</Button>
+                    <Button onClick={ props.handlePurchase }>Buy</Button>
+                    <Button onClick={ props.handleSell }variant='warning'>Sell</Button>
                     <Button className='btn btn-secondary' onClick={props.closeModal}>Close</Button>
                 </Modal.Footer>
             </Modal>
