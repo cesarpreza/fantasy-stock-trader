@@ -60,9 +60,8 @@ class Trade extends Component {
     }
 
     render() {
+        console.log(this.state.stockPurchased);
         console.log(this.state.stock)
-        console.log(this.state.searchTerm)
-        console.log(this.state.isModalShown)
         return (
             <div>
                 <div>
@@ -110,7 +109,7 @@ class Trade extends Component {
                             accountBalance={this.state.accountBalance}
                             buyButton={this.buyButton}
                             handleChange={this.handleChange}
-                            value={this.state.stockPurchased}
+                            stockPurchased={this.state.stockPurchased}
                         /> 
                         :
                             null
