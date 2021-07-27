@@ -38,6 +38,7 @@ app.post('/api/auth', async (req, res) => {
     }
 })
 
+
 app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName
     axios({

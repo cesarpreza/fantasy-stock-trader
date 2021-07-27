@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import StockModal from './StockModal';
-import { Button, Form, Card, Navbar } from 'react-bootstrap';
+import { Button, Form, Card, Navbar, Table } from 'react-bootstrap';
 import axios from 'axios';
 import StockCard from './StockCard';
 
@@ -56,10 +56,17 @@ class Trade extends Component {
 
 
     handlePurchase = e => {
-        const addValues = this.state.stock.latestPrice * this.state.stockPurchased
+        //When the buy button is clicked, the stock bought must subtract that amount from the account balance in state. 
+        const addValues = this.state.stock.latestPrice * this.state.stockPurchased;
+        const updateAccountBalance = this.state.accountBalance - addValues;
+        const updateHolding = this.state.holdingValue + addValues;
         if (this.state.stockPurchased !== '') {
-            console.log(addValues);
-            this.setState({stockPurchased: ''})
+            if (addValues < this.state.accountBalance) {
+                this.setState({ stockPurchased: '', isModalShown: false, accountBalance: updateAccountBalance, holdingValue: updateHolding });
+            } else {
+                alert('not enough money')
+            }
+            console.log(addValues, updateAccountBalance);
         }
         console.log('buy button clicked');
     }
@@ -124,6 +131,17 @@ class Trade extends Component {
                         :
                             null
                     }
+                </div>
+                <div>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Recent Purchase
+                                </th>
+                            </tr>
+                        </thead>
+                    </Table>
                 </div>
                 <div className='holdings'>
                 </div>
