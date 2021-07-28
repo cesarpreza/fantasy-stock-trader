@@ -42,13 +42,15 @@ app.post('/api/auth', async (req, res) => {
 //add stock bought to table post request?
 //Send the stock info to the DB 
 app.post('/api/buy', async (req, res) => {
-    const { stock_symbol, stock_name, stock_owned, stock_value, user_id } = req.body;
-    const addStock = await pool.query(
-        'INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
-        [ stock_symbol, stock_name, stock_owned, stock_value, user_id ]
-    )
-    res.json(addStock);
-}) 
+    try {
+        const { stock_symbol } = req.body;
+        const addStock = await pool.query('INSERT INTO user_holding(stock_symbol) VALUES($1) RETURNING *',
+            [stock_symbol])
+        res.json(addStock.rows[0]);
+    } catch {
+        console.log('error');
+    }
+})
 
 app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName

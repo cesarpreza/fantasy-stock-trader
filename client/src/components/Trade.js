@@ -13,7 +13,7 @@ class Trade extends Component {
             stock: [],
             isModalShown: false,
             isStockValid: false,
-            buyingPower: '',
+            buyingPower: 0,
             holdingValue: 0,
             stockPurchased: ''
         }
@@ -23,7 +23,8 @@ class Trade extends Component {
         await axios.get('/api/auth')
             .then(res => { 
                 if (res.data) {
-                    this.setState({buyingPower: res.data[0].buying_power})
+                    console.log(res.data);
+                    this.setState({buyingPower: res.data[0].buying_power, holdingValue: res.data[0].total_holding})
                 };
             })
     }
