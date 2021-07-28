@@ -10,7 +10,7 @@ function StockModal(props) {
             <Modal show={props.show}>
                 <Modal.Header>
                     <h5>{props.companyName} ({props.stockSymbol})</h5>
-                    <p>Available Balance - ${ props.accountBalance }</p>
+                    <p>Available Balance - ${ props.buyingPower }</p>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Stock price: ${props.stockPrice} </p>

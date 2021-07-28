@@ -13,10 +13,19 @@ class Trade extends Component {
             stock: [],
             isModalShown: false,
             isStockValid: false,
-            accountBalance: 10000,
+            buyingPower: '',
             holdingValue: 0,
             stockPurchased: ''
         }
+    }
+
+    fetchUserData = async() => {
+        await axios.get('/api/auth')
+            .then(res => { 
+                if (res.data) {
+                    this.setState({buyingPower: res.data[0].buying_power})
+                };
+            })
     }
 
     handleChange = e => {
@@ -58,21 +67,25 @@ class Trade extends Component {
     handlePurchase = e => {
         //When the buy button is clicked, the stock bought must subtract that amount from the account balance in state. 
         const addValues = this.state.stock.latestPrice * this.state.stockPurchased;
-        const updateAccountBalance = this.state.accountBalance - addValues;
+        const updateBuyingPower = this.state.buyingPower - addValues;
         const updateHolding = this.state.holdingValue + addValues;
         if (this.state.stockPurchased !== '') {
-            if (addValues < this.state.accountBalance) {
-                this.setState({ stockPurchased: '', isModalShown: false, accountBalance: updateAccountBalance, holdingValue: updateHolding });
+            if (addValues < this.state.buyingPower) {
+                this.setState({ stockPurchased: '', isModalShown: false, buyingPower: updateBuyingPower, holdingValue: updateHolding });
             } else {
                 alert('not enough money')
             }
-            console.log(addValues, updateAccountBalance);
+            console.log(addValues, updateBuyingPower);
         }
         console.log('buy button clicked');
     }
 
     handleSell = e => {
         console.log('sell button clicked')
+    }
+
+    componentDidMount() {
+        this.fetchUserData();
     }
 
     render() {
@@ -83,7 +96,7 @@ class Trade extends Component {
                 <div>
                     <h2>Trade</h2>
                     <Navbar id='portfolio-nav' className='nav-dark'>
-                        <p className='balances'>Account Balance: ${this.state.accountBalance}</p>
+                        <p className='balances'>Account Balance: ${this.state.buyingPower}</p>
                         <p className='balances'>Total Holding Value: ${this.state.holdingValue}</p>
                     </Navbar>
                     <p>Enter a stock symbol below to see the
@@ -122,7 +135,7 @@ class Trade extends Component {
                             stockSymbol={this.state.stock.symbol}
                             stockPrice={this.state.stock.latestPrice}
                             closeModal={this.closeModal}
-                            accountBalance={this.state.accountBalance}
+                            buyingPower={this.state.buyingPower}
                             handlePurchase={this.handlePurchase}
                             handleSell={this.handleSell}
                             handleChange={this.handleChange}

@@ -31,13 +31,24 @@ app.post('/api/auth', async (req, res) => {
     const userInfo = await pool.query('SELECT * FROM stock_user WHERE email = $1 AND password=$2;', [email, password]);
     if (userInfo.rows.length !== 0) {
         res.status(200).send({
-            userId: userInfo.rows[0].user_id
+            userId: userInfo.rows[0].user_id,
+            buyingPower: userInfo.rows[0].buying_power
         })
     } else {
         res.status(200).send('user does not exist or incorrect email/password');
     }
 })
 
+//add stock bought to table post request?
+//Send the stock info to the DB 
+app.post('/api/buy', async (req, res) => {
+    const { stock_symbol, stock_name, stock_owned, stock_value, user_id } = req.body;
+    const addStock = await pool.query(
+        'INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
+        [ stock_symbol, stock_name, stock_owned, stock_value, user_id ]
+    )
+    res.json(addStock);
+}) 
 
 app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName
