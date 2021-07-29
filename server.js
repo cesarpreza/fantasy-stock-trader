@@ -39,16 +39,15 @@ app.post('/api/auth', async (req, res) => {
     }
 })
 
-//add stock bought to table post request?
-//Send the stock info to the DB 
+
 app.post('/api/buy', async (req, res) => {
     try {
-        const { stock_symbol } = req.body;
-        const addStock = await pool.query('INSERT INTO user_holding(stock_symbol) VALUES($1) RETURNING *',
-            [stock_symbol])
+        const { stock_symbol, stock_name, stock_owned, stock_value, user_id } = req.body;
+        const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
+            [stock_symbol, stock_name, stock_owned, stock_value, user_id])
         res.json(addStock.rows[0]);
-    } catch {
-        console.log('error');
+    } catch(err) {
+        console.log(err.message);
     }
 })
 
@@ -60,7 +59,6 @@ app.get('/api/stocks', (req, res) => {
     })
         .then(response => {
             res.json(response.data);
-            //console.log(res);
         }).catch(err => {
             res.status(404).send(err);
     })
@@ -69,4 +67,3 @@ app.get('/api/stocks', (req, res) => {
 app.get("/*", (req, res) =>
 res.sendFile(path.join(__dirname, "client", "build", "index.html"))
 );
-
