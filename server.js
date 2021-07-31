@@ -41,6 +41,7 @@ app.post('/api/auth', async (req, res) => {
 
 
 app.post('/api/buy', async (req, res) => {
+    //dont need to include stock_value in the DB table
     try {
         const { stock_symbol, stock_name, stock_owned, stock_value, user_id } = req.body;
         const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',

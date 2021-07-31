@@ -12,7 +12,7 @@ function StockCard(props) {
                     <Card.Subtitle> {props.change <0 ? `${props.change}` : `+${props.change}`} today </Card.Subtitle>
                     <Card.Text> 52 Week High: ${props.fiftytwoWeekHigh} 52 Week Low: ${props.fiftytwoWeeklow} </Card.Text>
                     <Card.Text> Previous Close: ${props.previousClose} </Card.Text>
-                    <Button className='btn btn-primary-md' onClick={props.showModal} >Trade</Button>
+                    <Button variant='success' onClick={props.showModal} >Trade</Button>
                 </Card.Body>
             </Card>
         </div>
