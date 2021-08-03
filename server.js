@@ -37,20 +37,24 @@ app.post('/api/auth', async (req, res) => {
     } else {
         res.status(200).send('user does not exist or incorrect email/password');
     }
-})
+});
 
 
 app.post('/api/buy', async (req, res) => {
-    //dont need to include stock_value in the DB table
+    // endpoint for updating the buiying power? 
     try {
-        const { stock_symbol, stock_name, stock_owned, stock_value, user_id } = req.body;
+        const { stock_symbol, stock_name, stock_owned, stock_value, user_id, buying_power } = req.body;
         const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
-            [stock_symbol, stock_name, stock_owned, stock_value, user_id])
+            [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
+        
+        //const updateBuyingPower = await pool.query(''); // add inner join statement? 
+        
         res.json(addStock.rows[0]);
-    } catch(err) {
+    } catch (err) {
         console.log(err.message);
     }
-})
+});
+
 
 app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName
