@@ -65,6 +65,7 @@ class Trade extends Component {
     }
 
     handlePurchase = async e => {
+        // fix the rounding of the stock price if its more than 2 decimal places. 
         const addValues = this.state.stock.latestPrice * this.state.stockPurchased;
         const stockInfo = {
             stock_symbol: this.state.stock.symbol,
@@ -76,6 +77,7 @@ class Trade extends Component {
         await axios.post('http://localhost:3000/api/buy', stockInfo)
             .then(res => {
                 console.log(res);
+                this.setState({ stockPurchased: '', isModalShown: false })
         })
     }
 
