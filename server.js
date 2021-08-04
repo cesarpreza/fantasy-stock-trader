@@ -47,9 +47,9 @@ app.post('/api/buy', async (req, res) => {
         const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
             [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
         
-        //const updateBuyingPower = await pool.query(''); // add inner join statement? 
-        
-        res.json(addStock.rows[0]);
+        const updateBuyingPower = await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buying_power, user_id]);
+        console.log(addStock)
+        res.json(addStock.rows[0], updateBuyingPower.rows[0]);
     } catch (err) {
         console.log(err.message);
     }
