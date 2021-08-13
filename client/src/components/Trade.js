@@ -68,17 +68,18 @@ class Trade extends Component {
         const buyStock = `http://localhost:3000/api/buy`;
         // fix the rounding of the stock price if its more than 2 decimal places. 
         const addValues = this.state.stock.latestPrice * this.state.stockPurchased;
+        const updateBuyingPower = {
+            buying_power: this.state.buyingPower - addValues
+    };
         const stockInfo = {
             stock_symbol: this.state.stock.symbol,
             stock_name: this.state.stock.companyName,
             stock_owned: this.state.stockPurchased,
             stock_value: addValues,
-            user_id: localStorage.getItem('userId')
+            user_id: localStorage.getItem('userId'),
+            buying_power: Number(updateBuyingPower)
         }
-        const updateBuyingPower = {
-            buying_power: this.state.buyingPower - addValues
-    };
-        await axios.post(buyStock, stockInfo, updateBuyingPower)
+        await axios.post(buyStock, stockInfo)
             .then(res => {
                 if (res.data) {
                     this.updateBuyingPower;

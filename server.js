@@ -48,7 +48,7 @@ app.post('/api/buy', async (req, res) => {
             [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
         
         const updateBuyingPower = await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buying_power, user_id]);
-        console.log(updateBuyingPower)
+        console.log(updateBuyingPower) 
         res.status(200).json(addStock.rows[0], updateBuyingPower.rows[0]);
         //res.json(addStock.rows[0], updateBuyingPower.rows[0]);
     } catch (err) {
