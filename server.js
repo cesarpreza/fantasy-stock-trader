@@ -42,14 +42,14 @@ app.post('/api/auth', async (req, res) => {
 
 app.post('/api/buy', async (req, res) => {
     try {
-        const { stock_symbol, stock_name, stock_owned, stock_value, user_id, buying_power } = req.body;
+        const { stock_symbol, stock_name, stock_owned, stock_value, user_id, buying_power, total_holding } = req.body;
         const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
             [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
         
-        const updateBuyingPower = await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buying_power, user_id]);
+        const updateBuyingPower = await pool.query('UPDATE stock_user SET buying_power=$1, total_holding=$2 WHERE user_id=$3', [buying_power, total_holding, user_id]);
         console.log(updateBuyingPower) 
         res.status(200).json(addStock.rows[0]);
-        res.status(200).json(updateBuyingPower.rows[0])
+        res.status(200).json(updateBuyingPower.rows[0]);
     } catch (err) {
         console.log(err.message);
     }
