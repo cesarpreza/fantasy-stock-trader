@@ -26,7 +26,7 @@ class Trade extends Component {
                     console.log(res.data);
                     this.setState({
                         buyingPower: res.data[0].buying_power,
-                        holdingValue: res.data[0].total_holding
+                        holdingValue: this.state.holdingValue
                     })
                 };
             })
@@ -73,7 +73,7 @@ class Trade extends Component {
         const addValues = this.state.stock.latestPrice * this.state.stockPurchased;
         const updateBuyingPower = {
             buying_power: this.state.buyingPower - addValues,
-            total_holding: this.state.holdingValue + addValues
+            updateHolding: this.state.holdingValue
     };
         const stockInfo = {
             stock_symbol: this.state.stock.symbol,
@@ -82,7 +82,7 @@ class Trade extends Component {
             stock_value: addValues,
             user_id: localStorage.getItem('userId'),
             buying_power: Number(updateBuyingPower.buying_power),
-            total_holding: Number(updateBuyingPower.total_holding)
+            updateHolding: Number(updateBuyingPower.updateHolding)
         }
         await axios.post(buyStock, stockInfo)
             .then(res => {
@@ -91,7 +91,7 @@ class Trade extends Component {
                         stockPurchased: '',
                         isModalShown: false,
                         buyingPower: updateBuyingPower.buying_power,
-                        total_holding: updateBuyingPower.total_holding
+                        updateHolding: updateBuyingPower.updateHolding
                     });
                     
                 }

@@ -47,11 +47,9 @@ app.post('/api/buy', async (req, res) => {
             [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
         
         const updateBuyingPower = await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buying_power, user_id]);
-        const updateHolding = await pool.query('SELECT SUM(total_holding) FROM stock_user WHERE user_id = $1', [user_id]);
-        console.log(updateBuyingPower) 
-        res.status(200).json(addStock.rows[0]);
-        res.status(200).json(updateBuyingPower.rows[0]);
-        res.status(200).json(updateHolding.rows[0]);
+        const updateHolding = await pool.query('SELECT SUM(stock_value) FROM user_holding WHERE user_id = $1', [user_id]);
+        console.log(updateHolding.rows) 
+        res.status(200).json(addStock.rows[0], updateHolding.rows[0], updateBuyingPower.rows[0]);
     } catch (err) {
         console.log(err.message);
     }
