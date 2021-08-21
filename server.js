@@ -46,12 +46,12 @@ app.post('/api/buy', async (req, res) => {
 
         const userQuery = await pool.query('SELECT * FROM stock_user WHERE user_id=$1', [user_id]);
         const buyingPower = userQuery.rows[0].buying_power;
-
-        const stock_value = stock_owned * stock_price;
+        console.log(typeof stock_owned, typeof stock_price);
+        const stock_value = Number(stock_owned) * stock_price;
         const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
             [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
         
-        await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower, user_id]);
+        await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
         await pool.query('SELECT SUM(stock_value) FROM user_holding WHERE user_id = $1', [user_id]);
         res.status(200).json(addStock.rows[0]);
         console.log(stock_value)

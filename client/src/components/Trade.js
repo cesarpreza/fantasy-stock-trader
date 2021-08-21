@@ -73,8 +73,8 @@ class Trade extends Component {
         const body = {
             stock_symbol: this.state.stock.symbol,
             stock_name: this.state.stock.companyName,
-            stock_owned: this.state.stockPurchased,
-            stock_price: this.state.stock.stockPrice,
+            stock_owned: Number(this.state.stockPurchased),
+            stock_price: this.state.stock.latestPrice,
             user_id: localStorage.getItem('userId')
         }
         await axios.post(buyStock, body)
