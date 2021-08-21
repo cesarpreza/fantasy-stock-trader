@@ -26,7 +26,7 @@ class Trade extends Component {
                     console.log(res.data);
                     this.setState({
                         buyingPower: res.data[0].buying_power,
-                        holdingValue: this.state.holdingValue
+                        //holdingValue: this.state.holdingValue
                     })
                 };
             })
@@ -69,34 +69,26 @@ class Trade extends Component {
 
     handlePurchase = async e => {
         const buyStock = `http://localhost:3000/api/buy`;
-        // fix the rounding of the stock price if its more than 2 decimal places. 
-        const addValues = this.state.stock.latestPrice * this.state.stockPurchased;
-        const updateBuyingPower = {
-            buying_power: this.state.buyingPower - addValues,
-            updateHolding: this.state.holdingValue
-    };
-        const stockInfo = {
+        // fix the rounding of the stock price if its more than 2 decimal places.
+        const body = {
             stock_symbol: this.state.stock.symbol,
             stock_name: this.state.stock.companyName,
             stock_owned: this.state.stockPurchased,
-            stock_value: addValues,
-            user_id: localStorage.getItem('userId'),
-            buying_power: Number(updateBuyingPower.buying_power),
-            updateHolding: Number(updateBuyingPower.updateHolding)
+            stock_price: this.state.stock.stockPrice,
+            user_id: localStorage.getItem('userId')
         }
-        await axios.post(buyStock, stockInfo)
+        await axios.post(buyStock, body)
             .then(res => {
                 if (res.data) {
                     this.setState({
                         stockPurchased: '',
                         isModalShown: false,
-                        buyingPower: updateBuyingPower.buying_power,
-                        updateHolding: updateBuyingPower.updateHolding
+                        //buyingPower: buyingPower,
+                        //updateHolding: updateBuyingPower.updateHolding
                     });
                     
                 }
                 console.log(res);
-                console.log(updateBuyingPower);
         })
     }
 

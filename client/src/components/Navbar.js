@@ -14,7 +14,7 @@ function Navbar() {
 
     return (
         <nav className='navbar navbar-dark navbar-expand-sm'>
-            <h2 className='navbar-brand'>Rocket Traders</h2>
+            <h2 className='navbar-brand'>Moon Traders</h2>
             <nav className='ml-auto'>
                 <div>
                     <ul className='navbar-nav ml-auto'>
