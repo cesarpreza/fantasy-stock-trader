@@ -26,7 +26,7 @@ class Trade extends Component {
                     console.log(res.data);
                     this.setState({
                         buyingPower: res.data[0].buying_power,
-                        //holdingValue: this.state.holdingValue
+                        //holdingValue: 
                     })
                 };
             })
