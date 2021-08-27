@@ -55,9 +55,9 @@ app.post('/api/buy', async (req, res) => {
         const stockSum = await pool.query('SELECT SUM(stock_value) FROM user_holding WHERE user_id = $1', [user_id]);
         res.status(200).json({
             addStock: addStock.rows[0],
-            stockSum: stockSum.rows[0]
+            stockSum: stockSum.rows[0].sum
         });
-        console.log(stock_value, stockSum.rows[0])
+        console.log(stock_value, stockSum.rows[0].sum)
     } catch (err) {
         console.log(err.message);
     }
