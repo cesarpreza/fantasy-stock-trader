@@ -21,8 +21,13 @@ console.log('listening on port 3000');
 
 //DB ROUTES
 app.get('/api/auth', async (req, res) => {
+    const stockSum = await pool.query('SELECT SUM(stock_value) FROM user_holding WHERE user_id = 1');
     const getUser = await pool.query('SELECT * FROM stock_user');
-    res.json(getUser.rows);
+    res.json({
+        getUser: getUser.rows,
+        stockSum: stockSum.rows[0]
+    });
+    console.log(stockSum.rows[0])
 });
 
 app.post('/api/auth', async (req, res) => {
@@ -52,12 +57,9 @@ app.post('/api/buy', async (req, res) => {
             [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
         
         await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
-        const stockSum = await pool.query('SELECT SUM(stock_value) FROM user_holding WHERE user_id = $1', [user_id]);
         res.status(200).json({
-            addStock: addStock.rows[0],
-            stockSum: stockSum.rows[0].sum
+            addStock: addStock.rows[0]
         });
-        console.log(stock_value, stockSum.rows[0].sum)
     } catch (err) {
         console.log(err.message);
     }

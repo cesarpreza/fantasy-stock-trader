@@ -25,8 +25,8 @@ class Trade extends Component {
                 if (res.data) {
                     console.log(res.data);
                     this.setState({
-                        buyingPower: res.data[0].buying_power,
-                        //holdingValue: 
+                        buyingPower: res.data.getUser[0].buying_power,
+                        holdingValue: res.data.stockSum.sum
                     })
                 };
             })
@@ -82,13 +82,10 @@ class Trade extends Component {
                 if (res.data) {
                     this.setState({
                         stockPurchased: '',
-                        isModalShown: false,
-                        //buyingPower: buyingPower,
-                        //updateHolding: updateBuyingPower.updateHolding
+                        isModalShown: false
                     });
                     
                 }
-                console.log(res);
         })
     }
 
