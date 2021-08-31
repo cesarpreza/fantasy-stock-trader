@@ -93,9 +93,18 @@ class Trade extends Component {
         console.log('sell button clicked')
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.holdingValue !== this.state.holdingValue) {
+            this.fetchUserData()
+        }
+        console.log('updated', prevState.holdingValue);
+    }
+
+
     componentDidMount() {
         this.fetchUserData();
-    }
+    }    
+
 
     render() {
         console.log(this.state.stockPurchased);
