@@ -89,23 +89,6 @@ class Trade extends Component {
         })
     }
 
-
-    // handlePurchase = e => {
-    //     When the buy button is clicked, the stock bought must subtract that amount from the account balance in state. 
-    //     const addValues = this.state.stock.latestPrice * this.state.stockPurchased;
-    //     const updateBuyingPower = this.state.buyingPower - addValues;
-    //     const updateHolding = this.state.holdingValue + addValues;
-    //     if (this.state.stockPurchased !== '') {
-    //         if (addValues < this.state.buyingPower) {
-    //             this.setState({ stockPurchased: '', isModalShown: false, buyingPower: updateBuyingPower, holdingValue: updateHolding });
-    //         } else {
-    //             alert('not enough money')
-    //         }
-    //         console.log(addValues, updateBuyingPower);
-    //     }
-    //     console.log('buy button clicked');
-    // }
-
     handleSell = e => {
         console.log('sell button clicked')
     }
