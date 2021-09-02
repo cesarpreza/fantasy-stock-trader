@@ -97,7 +97,7 @@ class Trade extends Component {
         if (prevState.holdingValue !== this.state.holdingValue) {
             this.fetchUserData()
         }
-        console.log('updated', prevState.holdingValue);
+        console.log('updated', prevState.holdingValue, this.state.holdingValue);
     }
 
 
