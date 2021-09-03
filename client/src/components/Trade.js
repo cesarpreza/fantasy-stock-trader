@@ -79,25 +79,19 @@ class Trade extends Component {
         }
         await axios.post(buyStock, body)
             .then(res => {
-                if (res.data) {
-                    this.setState({
-                        stockPurchased: '',
-                        isModalShown: false
-                    });
-                    
-                }
+                //make another get request to api/auth to get portfolio data! Look at fetchuserdata() for query. It will be the same. 
+                // promise.all?
+                // if (res.data) { 
+                //     this.setState({
+                //         stockPurchased: '',
+                //         isModalShown: false
+                //     });
+                //}
         })
     }
 
     handleSell = e => {
         console.log('sell button clicked')
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.holdingValue !== this.state.holdingValue) {
-            this.fetchUserData()
-        }
-        console.log('updated', prevState.holdingValue, this.state.holdingValue);
     }
 
 
