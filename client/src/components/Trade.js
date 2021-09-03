@@ -23,10 +23,10 @@ class Trade extends Component {
         await axios.get('/api/auth')
             .then(res => { 
                 if (res.data) {
-                    console.log(res.data);
+                    //console.log(res.data);
                     this.setState({
                         buyingPower: res.data.getUser[0].buying_power,
-                        holdingValue: res.data.stockSum.sum
+                        //holdingValue: res.data.stockSum.sum
                     })
                 };
             })
@@ -46,7 +46,7 @@ class Trade extends Component {
             })
                 .then((res, req) => {
                         this.setState({ stock: res.data, searchTerm: '', isStockValid: true });
-                        console.log(res.data);
+                        //console.log(res.data);
                 }).catch(() => {
                     alert('The stock you entered could not be found. Please enter a valid stock symbol.');
                     this.setState({ stock: [], searchTerm: '', isStockValid: false })
@@ -69,6 +69,7 @@ class Trade extends Component {
 
     handlePurchase = async e => {
         const buyStock = `http://localhost:3000/api/buy`;
+        const queryDb = `http://localhost:3000/api/auth`;
         // fix the rounding of the stock price if its more than 2 decimal places.
         const body = {
             stock_symbol: this.state.stock.symbol,
@@ -78,7 +79,18 @@ class Trade extends Component {
             user_id: localStorage.getItem('userId')
         }
         await axios.post(buyStock, body)
-            .then(res => {
+            .then(await axios.get(queryDb)
+                .then(res => {
+                    console.log(res.data.stockSum.sum);
+                    if (res.data) {
+                        this.setState({
+                            stockPurchased: '',
+                            isModalShown: false,
+                            holdingValue: res.data.stockSum.sum
+                        })
+                    }
+            }))
+                //res => {
                 //make another get request to api/auth to get portfolio data! Look at fetchuserdata() for query. It will be the same. 
                 // promise.all?
                 // if (res.data) { 
@@ -87,7 +99,6 @@ class Trade extends Component {
                 //         isModalShown: false
                 //     });
                 //}
-        })
     }
 
     handleSell = e => {
@@ -101,8 +112,8 @@ class Trade extends Component {
 
 
     render() {
-        console.log(this.state.stockPurchased);
-        console.log(this.state.stock)
+        //console.log(this.state.stockPurchased);
+        //console.log(this.state.stock)
         return (
             <div>
                 <div>
