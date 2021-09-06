@@ -22,15 +22,11 @@ class Trade extends Component {
     fetchUserData = async() => {
         await axios.get('/api/auth')
             .then(res => { 
-                if (res.data ) {
+                if (res.data) {
                     this.setState({
                         buyingPower: res.data.getUser[0].buying_power,
                         holdingValue: res.data.stockSum.sum
                     }) 
-                } if (this.state.holdingValue === null) {
-                    this.setState({
-                        holdingValue: 0
-                    })
                 }
             })
     }
