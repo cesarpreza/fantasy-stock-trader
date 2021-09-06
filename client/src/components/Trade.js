@@ -99,11 +99,11 @@ class Trade extends Component {
         this.fetchUserData();
     }
     
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (prevState.holdingValue !== this.state.holdingValue) {
-    //         this.fetchUserData();
-    //     }
-    // }
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.holdingValue !== prevState.holdingValue) {
+            return this.fetchUserData();
+        }
+    }
 
 
     render() {
