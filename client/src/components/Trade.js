@@ -22,13 +22,16 @@ class Trade extends Component {
     fetchUserData = async() => {
         await axios.get('/api/auth')
             .then(res => { 
-                if (res.data) {
-                    //console.log(res.data);
+                if (res.data ) {
                     this.setState({
                         buyingPower: res.data.getUser[0].buying_power,
-                        //holdingValue: res.data.stockSum.sum
+                        holdingValue: res.data.stockSum.sum
+                    }) 
+                } if (this.state.holdingValue === null) {
+                    this.setState({
+                        holdingValue: 0
                     })
-                };
+                }
             })
     }
 
@@ -90,25 +93,21 @@ class Trade extends Component {
                         })
                     }
             }))
-                //res => {
-                //make another get request to api/auth to get portfolio data! Look at fetchuserdata() for query. It will be the same. 
-                // promise.all?
-                // if (res.data) { 
-                //     this.setState({
-                //         stockPurchased: '',
-                //         isModalShown: false
-                //     });
-                //}
     }
 
     handleSell = e => {
         console.log('sell button clicked')
     }
 
-
     componentDidMount() {
         this.fetchUserData();
-    }    
+    }
+    
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (prevState.holdingValue !== this.state.holdingValue) {
+    //         this.fetchUserData();
+    //     }
+    // }
 
 
     render() {
