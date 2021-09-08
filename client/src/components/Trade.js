@@ -80,7 +80,6 @@ class Trade extends Component {
         await axios.post(buyStock, body)
             .then(await axios.get(queryDb)
                 .then(res => {
-                    console.log(res.data.stockSum.sum);
                     if (res.data) {
                         this.setState({
                             stockPurchased: '',
@@ -101,7 +100,10 @@ class Trade extends Component {
     
     componentDidUpdate(prevProps, prevState) {
         if (this.state.holdingValue !== prevState.holdingValue) {
+            console.log(`updated from ${prevState.holdingValue} to ${this.state.holdingValue}`)
             return this.fetchUserData();
+        } else {
+            console.log('did not update')
         }
     }
 

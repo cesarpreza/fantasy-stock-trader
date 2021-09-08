@@ -3,8 +3,6 @@ import { Button, Modal } from 'react-bootstrap';
 
 
 function StockModal(props) {
-    console.log(props.stockPurchased);
-    
     return (
         <div>
             <Modal show={props.show}>

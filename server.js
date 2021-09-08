@@ -27,7 +27,6 @@ app.get('/api/auth', async (req, res) => {
         getUser: getUser.rows,
         stockSum: stockSum.rows[0]
     });
-    console.log(stockSum.rows[0])
 });
 
 app.post('/api/auth', async (req, res) => {
@@ -51,7 +50,6 @@ app.post('/api/buy', async (req, res) => {
 
         const userQuery = await pool.query('SELECT * FROM stock_user WHERE user_id=$1', [user_id]);
         const buyingPower = userQuery.rows[0].buying_power;
-        console.log(typeof stock_owned, typeof stock_price);
         const stock_value = Number(stock_owned) * stock_price;
         const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
             [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
@@ -59,7 +57,7 @@ app.post('/api/buy', async (req, res) => {
         await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
         res.status(200).json({
             addStock: addStock.rows[0]
-        });
+        }); console.log(buyingPower);
     } catch (err) {
         console.log(err.message);
     }
