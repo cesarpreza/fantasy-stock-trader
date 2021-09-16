@@ -65,10 +65,11 @@ app.post('/api/buy', async (req, res) => {
 });
 
 app.post('/api/sell', async (req, res) => {
-    //const {  } = ;
-    const querySellOrder = await pool.query('SELECT * FROM user_holding')
-    const test = 'endpoint worked'
-    res.status(200).send(test)
+    const { stock_symbol, user_id } = req.body;
+    const sellStockQuery = await pool.query('SELECT * FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
+    //const querySellOrder = await pool.query('SELECT * FROM user_holding')
+    res.status(200).json(sellStockQuery)
+    console.log(sellStockQuery.rows)
 }) 
 
 // const checkStock = pool.query(SELECT * FROM db WHERE user_id=$1 AND stock_symbol=$2) 

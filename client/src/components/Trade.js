@@ -90,8 +90,18 @@ class Trade extends Component {
             }))
     }
 
-    handleSell = e => {
-        console.log('sell button clicked')
+    handleSell = async e => {
+        const sellStock = `http://localhost:3000/api/sell`;
+        const sellBody = {
+            stock_symbol: this.state.stock.symbol,
+            user_id: localStorage.getItem('userId')
+        }
+
+        await axios.post(sellStock, sellBody)
+            .then(res => {
+                console.log('sell button clicked')
+            })
+        //console.log('sell button clicked')
     }
 
     componentDidMount() {
