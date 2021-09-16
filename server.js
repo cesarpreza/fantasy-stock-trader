@@ -21,6 +21,7 @@ console.log('listening on port 3000');
 
 //DB ROUTES
 app.get('/api/auth', async (req, res) => {
+    // hard coding the user. update this
     const stockSum = await pool.query('SELECT SUM(stock_value) FROM user_holding WHERE user_id = 1');
     const getUser = await pool.query('SELECT * FROM stock_user');
     res.json({
@@ -46,13 +47,13 @@ app.post('/api/auth', async (req, res) => {
 
 app.post('/api/buy', async (req, res) => {
     try {
-        const { stock_symbol, stock_name, stock_owned, stock_price, user_id } = req.body;
+        const { stock_symbol, stock_name, stock_owned, stock_price, user_id, transaction_type } = req.body;
 
         const userQuery = await pool.query('SELECT * FROM stock_user WHERE user_id=$1', [user_id]);
         const buyingPower = Math.round(userQuery.rows[0].buying_power * 100) / 100;
         const stock_value = Number(stock_owned) * stock_price;
-        const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id) VALUES($1,$2,$3,$4,$5) RETURNING *',
-            [stock_symbol, stock_name, stock_owned, stock_value, user_id]);
+        const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type) VALUES($1,$2,$3,$4,$5, $6) RETURNING *',
+            [stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type]);
         
         await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
         res.status(200).json({
@@ -62,6 +63,22 @@ app.post('/api/buy', async (req, res) => {
         console.log(err.message);
     }
 });
+
+app.post('/api/sell', async (req, res) => {
+    //const {  } = ;
+    const querySellOrder = await pool.query('SELECT * FROM user_holding')
+    const test = 'endpoint worked'
+    res.status(200).send(test)
+}) 
+
+// const checkStock = pool.query(SELECT * FROM db WHERE user_id=$1 AND stock_symbol=$2) 
+
+// If(checkStock) {
+//     (another SQL query to update the new balance) 
+//     } else {
+//        res.status(500).json({
+//         message: server error
+//     })
 
 
 app.get('/api/stocks', (req, res) => {

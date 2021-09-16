@@ -69,12 +69,12 @@ class Trade extends Component {
     handlePurchase = async e => {
         const buyStock = `http://localhost:3000/api/buy`;
         const queryDb = `http://localhost:3000/api/auth`;
-        // fix the rounding of the stock price if its more than 2 decimal places.
         const body = {
             stock_symbol: this.state.stock.symbol,
             stock_name: this.state.stock.companyName,
             stock_owned: Number(this.state.stockPurchased),
             stock_price: this.state.stock.latestPrice,
+            transaction_type: 'Buy', //hard coding "Buy"? Should this be dynamic? Only being initiated in handle purchase. 
             user_id: localStorage.getItem('userId')
         }
         await axios.post(buyStock, body)
