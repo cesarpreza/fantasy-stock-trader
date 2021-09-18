@@ -99,7 +99,7 @@ class Trade extends Component {
 
         await axios.post(sellStock, sellBody)
             .then(res => {
-                console.log('sell button clicked')
+                console.log(res.data)
             })
         //console.log('sell button clicked')
     }
