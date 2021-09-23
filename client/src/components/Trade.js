@@ -96,10 +96,14 @@ class Trade extends Component {
             stock_symbol: this.state.stock.symbol,
             user_id: localStorage.getItem('userId')
         }
-
+//refer to handle purchase function to handle the sell issue. Why is it an empty array?! and why doesnt my if/else statement catch it?
         await axios.post(sellStock, sellBody)
             .then(res => {
-                console.log(res.data)
+                if (res.data !== []) {
+                    console.log("stock is in db")
+                } else {
+                    console.log('stock not in db')
+                }
             })
         //console.log('sell button clicked')
     }
