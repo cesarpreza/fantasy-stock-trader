@@ -65,20 +65,36 @@ app.post('/api/buy', async (req, res) => {
 });
 
 app.post('/api/sell', async (req, res) => {
-        const { stock_symbol, user_id } = req.body;
-        const sellStockQuery = await pool.query('SELECT * FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
-        //const querySellOrder = await pool.query('SELECT * FROM user_holding')
-    if (sellStockQuery !== []) {
-        res.status(200).json(sellStockQuery.rows)
-        console.log(sellStockQuery.rows)
-    } else {
-        res.status(200).json({
-            message: "stock is not in db"
-        });
-        console.log(res)
-    }
+    const { stock_symbol, user_id } = req.body;
+    const sellStockQuery = await pool.query('SELECT * FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
+    //const querySellOrder = await pool.query('SELECT * FROM user_holding')
+        if (sellStockQuery.rows[0]) {
+            res.status(200).json(sellStockQuery.rows[0])
+        console.log(sellStockQuery.rows[0]);
+        } else {
+            res.status(204).json({
+                message: "stock is not in db"
+            });
+            console.log('stock not in db')
+        } 
     
-}) 
+})
+
+// app.post(`/api/sell`, async (req, res) => {
+//     try {
+//         const { stock_symbol, user_id } = req.body;
+//         const sellStockQuery = await pool.query('SELECT * FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
+//         //const querySellOrder = await pool.query('SELECT * FROM user_holding')
+//         res.status(200).json(sellStockQuery.rows)
+//         console.log(sellStockQuery.rows)
+//     } catch (err) {
+//         res.status(200).json({
+//             message: "stock is not in db"
+//         });
+//         console.log(res)
+//         console.log(err.message);
+//     }
+// })
 
 // const checkStock = pool.query(SELECT * FROM db WHERE user_id=$1 AND stock_symbol=$2) 
 
