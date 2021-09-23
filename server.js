@@ -68,11 +68,12 @@ app.post('/api/sell', async (req, res) => {
         const { stock_symbol, user_id } = req.body;
         const sellStockQuery = await pool.query('SELECT * FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
         //const querySellOrder = await pool.query('SELECT * FROM user_holding')
-    if (sellStockQuery) {
+    if (sellStockQuery === []) {
+        //res.status(500).send('user does not exist or incorrect email/password');
+        console.log('there was an error')
+    } else {
         res.status(200).json(sellStockQuery.rows)
         console.log(sellStockQuery.rows)
-    } else {
-        console.log('there was an error')
     }
     
 }) 
