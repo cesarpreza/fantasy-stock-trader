@@ -59,10 +59,12 @@ app.post('/api/buy', async (req, res) => {
         
         // create a query to UPDATE a row if the stock is already in the DB.
             // if (stock exists in db) 
+        await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
+
         if (stockHoldingQuery.rows[0]) {
-            await pool.query('UPDATE user_holding SET stock_owned=$1 WHERE user_id=$2', [stock_owned, user_id]);
+            await pool.query('UPDATE user_holding SET stock_owned=$1 WHERE user_id=$2 AND stock_symbol=$3', [stock_owned, user_id, stock_symbol]);
             //res.status(200).json(updateStock.rows);
-            console.log('user query was true if you see this message', stockHoldingQuery.rows[0]);
+            console.log('user query was true if you see this message', stockHoldingQuery.rows[0].stock_owned);
         } else {
             const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type) VALUES($1,$2,$3,$4,$5, $6) RETURNING *',
             [stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type]);
@@ -71,7 +73,6 @@ app.post('/api/buy', async (req, res) => {
             }); console.log(buyingPower);
             console.log('user query was false meaning the stock is not in the db and new stock gets added', stockHoldingQuery.rows[0]);  
         }
-        await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
     } catch (err) {
         console.log(err.message);
     }
