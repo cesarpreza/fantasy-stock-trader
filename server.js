@@ -63,21 +63,15 @@ app.post('/api/buy', async (req, res) => {
             await pool.query('UPDATE user_holding SET stock_owned=$1 WHERE user_id=$2', [stock_owned, user_id]);
             //res.status(200).json(updateStock.rows);
             console.log('user query was true if you see this message', stockHoldingQuery.rows[0]);
-            //await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
         } else {
             const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type) VALUES($1,$2,$3,$4,$5, $6) RETURNING *',
-                [stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type]);
-                res.status(200).json({
-                        addStock: addStock.rows[0]
-                    }); console.log(buyingPower);
+            [stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type]);
+            res.status(200).json({
+                addStock: addStock.rows[0]
+            }); console.log(buyingPower);
             console.log('user query was false meaning the stock is not in the db and new stock gets added', stockHoldingQuery.rows[0]);  
-            }
-                // query update variable for that specific stock. 
-            // else 
-                // run INSERT query here to add the new stock to the DB 
-        // res.status(200).json({
-        //     addStock: addStock.rows[0]
-        // }); console.log(buyingPower);
+        }
+        await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
     } catch (err) {
         console.log(err.message);
     }
