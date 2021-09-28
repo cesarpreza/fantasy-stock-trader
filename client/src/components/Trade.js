@@ -86,6 +86,7 @@ class Trade extends Component {
                             isModalShown: false,
                             holdingValue: res.data.stockSum.sum
                         })
+                        console.log(res.data)
                     }
             }))
     }
