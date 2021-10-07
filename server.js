@@ -53,14 +53,14 @@ app.post('/api/buy', async (req, res) => {
         const stockHoldingQuery = await pool.query('SELECT * from user_holding WHERE stock_symbol=$1 AND user_id=$2', [ stock_symbol, user_id ]);
         const buyingPower = Math.round(userQuery.rows[0].buying_power * 100) / 100;
         const stock_value = Number(stock_owned) * stock_price;
-        const sumStockOwned = stockHoldingQuery.rows[0].stock_owned;
-
+        
         await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
-            // updating stock owned should be the sum of the stock in the DB + the new stock purchases. 
-            // const updatedStockOwned = current stock owned + new stock owned. 
-            // what is the current stock owned variable? - query to DB for stock owned. 
-            // what is the new stock owned - currentsStockOwned + stock_owned (from client)
+        // updating stock owned should be the sum of the stock in the DB + the new stock purchases. 
+        // const updatedStockOwned = current stock owned + new stock owned. 
+        // what is the current stock owned variable? - query to DB for stock owned. 
+        // what is the new stock owned - currentsStockOwned + stock_owned (from client)
         if (stockHoldingQuery.rows[0]) {
+            const sumStockOwned = stockHoldingQuery.rows[0].stock_owned;
             await pool.query('UPDATE user_holding SET stock_owned=$1 WHERE user_id=$2 AND stock_symbol=$3', [sumStockOwned + stock_owned, user_id, stock_symbol]);
             //res.status(200).json(updateStock.rows);
             console.log('user query was true if you see this message');
