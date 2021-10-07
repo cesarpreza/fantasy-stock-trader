@@ -61,16 +61,17 @@ app.post('/api/buy', async (req, res) => {
         // what is the new stock owned - currentsStockOwned + stock_owned (from client)
         if (stockHoldingQuery.rows[0]) {
             const sumStockOwned = stockHoldingQuery.rows[0].stock_owned;
-            await pool.query('UPDATE user_holding SET stock_owned=$1 WHERE user_id=$2 AND stock_symbol=$3', [sumStockOwned + stock_owned, user_id, stock_symbol]);
+            const currentStockValue = Number(stockHoldingQuery.rows[0].stock_value) + Number(stock_value);
+            await pool.query('UPDATE user_holding SET stock_owned=$1, stock_value=$2 WHERE user_id=$3 AND stock_symbol=$4', [sumStockOwned + stock_owned, currentStockValue, user_id, stock_symbol]);
             //res.status(200).json(updateStock.rows);
-            console.log('user query was true if you see this message');
+            console.log('user query was true if you see this message', currentStockValue);
         } else {
             const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type) VALUES($1,$2,$3,$4,$5, $6) RETURNING *',
             [stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type]);
             res.status(200).json({
                 addStock: addStock.rows[0]
             }); console.log(buyingPower);
-            console.log('user query was false meaning the stock is not in the db and new stock gets added', stockHoldingQuery.rows[0]);  
+            console.log('user query was false meaning the stock is not in the db and new stock gets added');  
         }
     } catch (err) {
         console.log(err.message);
