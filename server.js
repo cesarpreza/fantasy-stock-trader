@@ -73,15 +73,18 @@ app.post('/api/buy', async (req, res) => {
 });
 
 app.post('/api/sell', async (req, res) => {
-    const { stock_symbol, user_id, stock_sold } = req.body;
+    const { stock_symbol, user_id, stock_sold, stock_price, stock_value } = req.body;
     const sellStockQuery = await pool.query('SELECT * FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
     const sumOfStockOwned = await pool.query('SELECT  SUM(stock_owned) FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
     const stockSold = Number(stock_sold);
+    const stockPrice = Number(stock_price);
+    const stockValue = Number(stockSold) * stockPrice;
     //const querySellOrder = await pool.query('SELECT * FROM user_holding')
     if (sellStockQuery.rows[0]) {
         res.status(200).json(sellStockQuery.rows);
         await pool.query('UPDATE user_holding SET stock_owned=$1 WHERE user_id=$2 AND stock_symbol=$3', [sellStockQuery.rows[0].stock_owned - stockSold, user_id, stock_symbol]);
-        console.log(sumOfStockOwned.rows[0], sellStockQuery.rows[0].stock_owned - stockSold);
+        await pool.query('UPDATE user_holding SET stock_value=$1 WHERE user_id=$2 AND stock_symbol=$3', [sellStockQuery.rows[0].stock_value - stockValue, user_id, stock_symbol]);
+        console.log(sumOfStockOwned.rows[0], sellStockQuery.rows[0].stock_owned - stockSold, sellStockQuery.rows[0].stock_value - stockValue);
     } else {
         res.status(204).json({
             message: "stock is not in db"
