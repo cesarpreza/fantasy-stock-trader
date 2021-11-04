@@ -95,14 +95,15 @@ class Trade extends Component {
         const sellStock = `http://localhost:3000/api/sell`;
         const sellBody = {
             stock_symbol: this.state.stock.symbol,
-            user_id: localStorage.getItem('userId')
+            user_id: localStorage.getItem('userId'),
+            stock_sold: Number(this.state.stockPurchased)
         }
         await axios.post(sellStock, sellBody)
             .then(res => {
                 if (res.status == 200) {
-                    console.log(`${res.status} status ok`)
+                    console.log(`${res.status} status ok`, this.state.stockPurchased);
                 } else {
-                    alert('You do not own or have enough shares to complete this sell order')
+                    alert('You do not own enough shares to complete this sell order')
                     this.setState({
                         stockPurchased: '',
                         isModalShown: false,
@@ -127,8 +128,6 @@ class Trade extends Component {
 
 
     render() {
-        //console.log(this.state.stockPurchased);
-        //console.log(this.state.stock)
         return (
             <div>
                 <div>

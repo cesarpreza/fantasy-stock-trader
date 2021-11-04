@@ -44,7 +44,6 @@ app.post('/api/auth', async (req, res) => {
     }
 });
 
-//I need to change this endpoint to UPDATE a row containing a stock and add a new one if a stock that is not owned is purchased. 
 app.post('/api/buy', async (req, res) => {
     try {
         const { stock_symbol, stock_name, stock_owned, stock_price, user_id, transaction_type } = req.body;
@@ -55,16 +54,11 @@ app.post('/api/buy', async (req, res) => {
         const stock_value = Number(stock_owned) * stock_price;
         
         await pool.query('UPDATE stock_user SET buying_power=$1 WHERE user_id=$2', [buyingPower - stock_value, user_id]);
-        // updating stock owned should be the sum of the stock in the DB + the new stock purchases. 
-        // const updatedStockOwned = current stock owned + new stock owned. 
-        // what is the current stock owned variable? - query to DB for stock owned. 
-        // what is the new stock owned - currentsStockOwned + stock_owned (from client)
         if (stockHoldingQuery.rows[0]) {
             const sumStockOwned = stockHoldingQuery.rows[0].stock_owned;
             const currentStockValue = Number(stockHoldingQuery.rows[0].stock_value) + Number(stock_value);
             await pool.query('UPDATE user_holding SET stock_owned=$1, stock_value=$2 WHERE user_id=$3 AND stock_symbol=$4', [sumStockOwned + stock_owned, currentStockValue, user_id, stock_symbol]);
-            //res.status(200).json(updateStock.rows);
-            console.log('user query was true if you see this message', currentStockValue);
+            console.log('user query was true if you see this message', `current stock value is ${currentStockValue}`);
         } else {
             const addStock = await pool.query('INSERT INTO user_holding(stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type) VALUES($1,$2,$3,$4,$5, $6) RETURNING *',
             [stock_symbol, stock_name, stock_owned, stock_value, user_id, transaction_type]);
@@ -79,47 +73,22 @@ app.post('/api/buy', async (req, res) => {
 });
 
 app.post('/api/sell', async (req, res) => {
-    const { stock_symbol, user_id } = req.body;
+    const { stock_symbol, user_id, stock_sold, stock_owned } = req.body;
     const sellStockQuery = await pool.query('SELECT * FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
     const sumOfStockOwned = await pool.query('SELECT  SUM(stock_owned) FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
+    const stockSold = Number(stock_owned) - Number(stock_sold);
     //const querySellOrder = await pool.query('SELECT * FROM user_holding')
     if (sellStockQuery.rows[0]) {
-        res.status(200).json(sellStockQuery.rows)
-        console.log(sumOfStockOwned.rows[0]);
+        res.status(200).json(sellStockQuery.rows);
+        //await pool.query()
+        console.log(sumOfStockOwned.rows[0], stockSold);
     } else {
         res.status(204).json({
             message: "stock is not in db"
         });
         console.log('stock not in db')
     } 
-
 })
-
-// app.post(`/api/sell`, async (req, res) => {
-//     try {
-//         const { stock_symbol, user_id } = req.body;
-//         const sellStockQuery = await pool.query('SELECT * FROM user_holding WHERE user_id=$1 AND stock_symbol=$2', [user_id, stock_symbol]);
-//         //const querySellOrder = await pool.query('SELECT * FROM user_holding')
-//         res.status(200).json(sellStockQuery.rows)
-//         console.log(sellStockQuery.rows)
-//     } catch (err) {
-//         res.status(200).json({
-//             message: "stock is not in db"
-//         });
-//         console.log(res)
-//         console.log(err.message);
-//     }
-// })
-
-// const checkStock = pool.query(SELECT * FROM db WHERE user_id=$1 AND stock_symbol=$2) 
-
-// If(checkStock) {
-//     (another SQL query to update the new balance) 
-//     } else {
-//        res.status(500).json({
-//         message: server error
-//     })
-
 
 app.get('/api/stocks', (req, res) => {
     const stockName = req.query.stockName
