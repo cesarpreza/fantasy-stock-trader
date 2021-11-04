@@ -81,6 +81,7 @@ class Trade extends Component {
             .then(await axios.get(queryDb)
                 .then(res => {
                     if (res.data) {
+                        this.fetchUserData();
                         this.setState({
                             stockPurchased: '',
                             isModalShown: false,
@@ -102,6 +103,7 @@ class Trade extends Component {
         await axios.post(sellStock, sellBody)
             .then(res => {
                 if (res.status == 200 && res.data) {
+                    this.fetchUserData();
                     this.setState({
                         stockPurchased: '',
                         isModalShown: false,
